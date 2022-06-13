@@ -1,0 +1,30 @@
+use ::BBjControlValidation/Validator.bbj::Validator
+rem /**
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public Match extends Validator
+  rem /**
+  rem  * Validates that a value matches the value of a second control which can be found with the given selector
+  rem  *
+  rem  * @param selector$ - The query selector to use in order to find the control in the DOM
+  rem  * @param message$ - The invalid message
+  rem  */
+  method public Match(BBjString selector$, BBjString message$)
+    #super!(message$, "")
+    #Validator$ = "" +
+:    "const secondControl = document.querySelector('" + str(selector$) +"');" +
+:    "const secondValue = secondControl ? secondControl.value: '';" +
+:    "if (x != secondValue) {" +
+:    "  addViolation('" + message$ + "', {secondValue});" +
+:    "} else {requestAnimationFrame(() => secondControl.validate())}"
+  methodend
+  rem /**
+  rem  * Validates that a value matches the value of a second control which can be found with the given selector
+  rem  *
+  rem  * @param selector$ - The query selector to use in order to find the control in the DOM
+  rem  */
+  method public Match(BBjString selector$)
+    #this!(selector$, "The value does not match.")
+  methodend
+
+classend

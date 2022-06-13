@@ -1,0 +1,43 @@
+rem /**
+rem  * The base class for building a Javascript Validator. Each
+rem  * Validator must extend this class to be used with BBjValidationsBuilder
+rem  *
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public Validator
+  rem /**
+  rem  * The invalid message to display when the control is invalid.
+  rem  */
+  field public BBjString Message$ = ""
+  rem /**
+  rem  * The Javascript validator
+  rem  */
+  field protected BBjString Validator$ = ""
+  rem /**
+  rem  * construct a new Validator
+  rem  *
+  rem  * @param message$ - The error message
+  rem  * @param validator$ - The Javascript validator
+  rem  */
+  method public Validator(BBjString message$ , BBjString validator$)
+    #Message$ = message$
+    #Validator$ = validator$
+  methodend
+  rem /**
+  rem  * Get the code of the javascript validator
+  rem  *
+  rem  * @return the code of the javascript validator
+  rem  */
+  method public BBjString getValidator()
+    methodret #Validator$
+  methodend
+  rem /**
+  rem  * Get the code of the javascript validator
+  rem  *
+  rem  * @return the code of the javascript validator
+  rem  */
+  method public String toString()
+    methodret #getValidator()
+  methodend
+
+classend

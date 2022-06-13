@@ -1,0 +1,27 @@
+use ::BBjControlValidation/Validator.bbj::Validator
+rem /**
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public IsFalse extends Validator
+  rem /**
+  rem  * Validates that the control is not checked
+  rem  *
+  rem  * @param message$ - The invalid message
+  rem  */
+  method public IsFalse(BBjString message$)
+    #super!(message$, "")
+    #Validator$ = "" +
+:    "if (x !== false) {" +
+:    "  addViolation('" + message$ + "');" +
+:    "}"
+  methodend
+  rem /**
+  rem  * Validates that the control is not checked
+  rem  *
+  rem  * @param selector$ - The query selector to use in order to find the control in the DOM
+  rem  */
+  method public IsFalse()
+    #this!("The field should be unchecked.")
+  methodend
+
+classend

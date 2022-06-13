@@ -1,0 +1,28 @@
+{
+  "name": "BBjControlValidation",
+  "version": "0.0.1",
+  "private": false,
+  "description": "BBjControlValidation provides a set of validation expressions for use in BBjControls.",
+  "author": "BASIS Europe Distribution GmbH",
+  "license": "MIT",
+  "homepage": "https://bbj-plugins.github.io/BBjControlValidation",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BBj-Plugins/BBjControlValidation"
+  },
+  "keywords": [
+    "bbj",
+    "dwc",
+    "validations",
+    "expressions",
+    "form"
+  ],
+  "bugs": {
+    "url": "https://github.com/BBj-Plugins/BBjControlValidation/issues"
+  },
+  "bbj_dependency": "22.10",
+  "client": [
+    "DWC"
+  ],
+  "plugin_dependencies": []
+}

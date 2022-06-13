@@ -1,0 +1,21 @@
+use ::BBjControlValidation/Validators/Regex.bbj::Regex
+rem /**
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public Email extends Regex
+  rem /**
+  rem  * Validates that a value is a valid email address
+  rem  *
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public Email(BBjString message$)
+    #super!("^(([^<>()[\\]\\.,;:\\s@\\""]+(\\.[^<>()[\\]\\.,;:\\s@\\""]+)*)|(\\"".+\\""))@(([^<>()[\\]\\.,;:\\s@\\""]+\\.)+[^<>()[\\]\\.,;:\\s@\\""]{2,})$", "i", message$)
+  methodend
+  rem /**
+  rem  * Validates that a value is a valid email address
+  rem  */
+  method public Email()
+    #this!("The value is not a valid email address.")
+  methodend
+
+classend

@@ -1,0 +1,46 @@
+use ::BBjControlValidation/Validator.bbj::Validator
+rem /**
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public EqualTo extends Validator
+  rem /**
+  rem  * Validates that the value is equal to the given value
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public EqualTo(BBjString comparedValue!, BBjString message$)
+    #super!(message$, "")
+    #Validator$ = "" +
+:    "if (x != '" + str(comparedValue!) + "') {" +
+:    "  const comparedValue = '" + str(comparedValue!) + "';" +
+:    "  addViolation('" + message$ + "', {comparedValue});" +
+:    "}"
+  methodend
+  rem /**
+  rem  * Validates that the value is equal to the given value
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public EqualTo(BBjNumber comparedValue!, BBjString message$)
+    #this!(str(comparedValue!), message$)
+  methodend
+  rem /**
+  rem  * Validates that the value is equal to the given value
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  */
+  method public EqualTo(BBjString comparedValue!)
+    #this!(comparedValue!, "This value should be equal to ""{{comparedValue}}"".")
+  methodend
+  rem /**
+  rem  * Validates that the value is equal to the given value
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  */
+  method public EqualTo(BBjNumber comparedValue!)
+    #this!(str(comparedValue!))
+  methodend
+
+classend

@@ -1,0 +1,445 @@
+use ::BBjControlValidation/Validator.bbj::Validator
+rem /**
+rem  * The ValidationBuilder can be used to construct a collection of
+rem  * javascript validators for a given control.
+rem  *
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public ValidationBuilder
+
+  field protected Boolean Accumulate! = BBjAPI.TRUE
+  field protected BBjVector Validators! = new BBjVector()
+  rem /**
+  rem  * Construct a new ValidationBuilder
+  rem  */
+  method public ValidationBuilder()
+  methodend
+  rem /**
+  rem  * Construct a new ValidationBuilder
+  rem  *
+  rem  * @param accumulate! - When true , All violations will be accumulated and displayed in the control's error message.
+  rem  *                      When false, only the first violation will be displayed in the control error message.
+  rem  *                      The default value is true.
+  rem  */
+  method public ValidationBuilder(Boolean accumulate!)
+    #Accumulate! = accumulate!
+  methodend
+  rem /**
+  rem  * Add validator to the builder
+  rem  *
+  rem  * @param validator$ - The validator instance to add
+  rem  */
+  method public ValidationBuilder add(Validator validator!)
+    #getValidators().addItem(validator!)
+    methodret #this!
+  methodend
+  rem /**
+  rem  * Add `NotBlank` validator with a custom error message
+  rem  *
+  rem  * @param message$ - The error message to be display
+  rem  */
+  method public ValidationBuilder notBlank(BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/NotBlank.bbj::NotBlank(message$))
+  methodend
+  rem /**
+  rem  * Add `NotBlank` validator with default error message
+  rem  */
+  method public ValidationBuilder notBlank()
+    methodret #add(new ::BBjControlValidation/Validators/NotBlank.bbj::NotBlank())
+  methodend
+  rem /**
+  rem  * Add `Blank` validator with a custom error message
+  rem  *
+  rem  * @param message$ - The error message to be display
+  rem  */
+  method public ValidationBuilder blank(BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/Blank.bbj::Blank(message$))
+  methodend
+  rem /**
+  rem  * Add `Blank` validator with default error message
+  rem  */
+  method public ValidationBuilder blank()
+    methodret #add(new ::BBjControlValidation/Validators/Blank.bbj::Blank())
+  methodend
+  rem /**
+  rem  * Add `Length` validator with a custom error message
+  rem  *
+  rem  * @param length! - the length of the string
+  rem  * @param message$ - The error message to display
+  rem  */
+  method public ValidationBuilder length(BBjNumber length!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/Length.bbj::Length(length!, message$))
+  methodend
+  rem /**
+  rem  * Add `Length` validator with the default error message
+  rem  *
+  rem  * @param length! - the length of the string
+  rem  */
+  method public ValidationBuilder length(BBjNumber length!)
+    methodret #add(new ::BBjControlValidation/Validators/Length.bbj::Length(length!))
+  methodend
+  rem /**
+  rem  * Add `MinLength` validator with a custom error message
+  rem  *
+  rem  * @param min! - The minimum length of the string
+  rem  * @param message$ - The error message to display
+  rem  */
+  method public ValidationBuilder minLength(BBjNumber min!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/MinLength.bbj::MinLength(min!, message$))
+  methodend
+  rem /**
+  rem  * Add `MinLength` validator with the default error message
+  rem  *
+  rem  * @param min! - The minimum length of the string
+  rem  */
+  method public ValidationBuilder minLength(BBjNumber min!)
+    methodret #add(new ::BBjControlValidation/Validators/MinLength.bbj::MinLength(min!))
+  methodend
+  rem /**
+  rem  * Add `MaxLength` validator with a custom error message
+  rem  *
+  rem  * @param max! - The maximum length of the string
+  rem  * @param message$ - The error message to display
+  rem  */
+  method public ValidationBuilder maxLength(BBjNumber max!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/MaxLength.bbj::MaxLength(max!, message$))
+  methodend
+  rem /**
+  rem  * Add `MaxLength` validator with the default error message
+  rem  *
+  rem  * @param max! - The maximum length of the string
+  rem  */
+  method public ValidationBuilder maxLength(BBjNumber max!)
+    methodret #add(new ::BBjControlValidation/Validators/MaxLength.bbj::MaxLength(max!))
+  methodend
+  rem /**
+  rem  * Add `Regex` validator with a custom error message
+  rem  *
+  rem  * @param regex$ - The text of the regular expression.
+  rem  * @param flags$ - If regular expression flags.
+  rem  * @param message$ - The error message to display
+  rem  */
+  method public ValidationBuilder regex(BBjString regex$, BBjString flags$, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/Regex.bbj::Regex(regex$, flags$, message$))
+  methodend
+  rem /**
+  rem  * Add `Regex` validator with a custom error message
+  rem  *
+  rem  * @param regex$ - The text of the regular expression.
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder regex(BBjString regex$, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/Regex.bbj::Regex(regex$, message$))
+  methodend
+  rem /**
+  rem  * Add `Regex` validator with the default error message
+  rem  *
+  rem  * @param regex$ - The text of the regular expression.
+  rem  */
+  method public ValidationBuilder regex(BBjString regex$)
+    methodret #add(new ::BBjControlValidation/Validators/Regex.bbj::Regex(regex$))
+  methodend
+  rem /**
+  rem  * Add `Email` validator with a custom error message
+  rem  *
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder email(BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/Email.bbj::Email(message$))
+  methodend
+  rem /**
+  rem  * Add `Email` validator with the default error message
+  rem  */
+  method public ValidationBuilder email()
+    methodret #add(new ::BBjControlValidation/Validators/Email.bbj::Email())
+  methodend
+  rem /**
+  rem  * Add `Password` validator with a custom error message
+  rem  *
+  rem  * @param length! - The minimum length of the password
+  rem  * @param message$ - The error message to display
+  rem  */
+  method public ValidationBuilder password(BBjNumber length!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/Password.bbj::Password(length!, message$))
+  methodend
+  rem /**
+  rem  * Add `Password` validator with the default error message
+  rem  *
+  rem  * @param length! - The minimum length of the password
+  rem  */
+  method public ValidationBuilder password(BBjNumber length!)
+    methodret #add(new ::BBjControlValidation/Validators/Password.bbj::Password(length!))
+  methodend
+  rem /**
+  rem  * Add `Password` validator with a custom error message
+  rem  *
+  rem  * @param message$ - The error message to display
+  rem  */
+  method public ValidationBuilder password(BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/Password.bbj::Password(message$))
+  methodend
+  rem /**
+  rem  * Add `Password` validator with a custom error message
+  rem  */
+  method public ValidationBuilder password()
+    methodret #add(new ::BBjControlValidation/Validators/Password.bbj::Password())
+  methodend
+  rem /**
+  rem  * Add `LessThan` validator with a custom error message
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder lessThan(BBjNumber comparedValue!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/LessThan.bbj::LessThan(comparedValue!, message$))
+  methodend
+  rem /**
+  rem  * Add `LessThan` validator with the default error message
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  */
+  method public ValidationBuilder lessThan(BBjNumber comparedValue!)
+    methodret #add(new ::BBjControlValidation/Validators/LessThan.bbj::LessThan(comparedValue!))
+  methodend
+  rem /**
+  rem  * Add `LessThanOrEqual` validator with a custom error message
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder lessThanOrEqual(BBjNumber comparedValue!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/LessThanOrEqual.bbj::LessThanOrEqual(comparedValue!, message$))
+  methodend
+  rem /**
+  rem  * Add `LessThanOrEqual` validator with the default error message
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  */
+  method public ValidationBuilder lessThanOrEqual(BBjNumber comparedValue!)
+    methodret #add(new ::BBjControlValidation/Validators/LessThanOrEqual.bbj::LessThanOrEqual(comparedValue!))
+  methodend
+  rem /**
+  rem  * Add `GreaterThan` validator with a custom error message
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder greaterThan(BBjNumber comparedValue!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/GreaterThan.bbj::GreaterThan(comparedValue!, message$))
+  methodend
+  rem /**
+  rem  * Add `GreaterThan` validator with the default error message
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  */
+  method public ValidationBuilder greaterThan(BBjNumber comparedValue!)
+    methodret #add(new ::BBjControlValidation/Validators/GreaterThan.bbj::GreaterThan(comparedValue!))
+  methodend
+  rem  * Add `GreaterThanOrEqual` validator with a custom error message
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder greaterThanOrEqual(BBjNumber comparedValue!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/GreaterThanOrEqual.bbj::GreaterThanOrEqual(comparedValue!, message$))
+  methodend
+  rem  * Add `GreaterThanOrEqual` validator with the default error message
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  */
+  method public ValidationBuilder greaterThanOrEqual(BBjNumber comparedValue!)
+    methodret #add(new ::BBjControlValidation/Validators/GreaterThanOrEqual.bbj::GreaterThanOrEqual(comparedValue!))
+  methodend
+  rem  * Add `DivisibleBy` validator with a custom error message
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder divisibleBy(BBjNumber comparedValue!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/DivisibleBy.bbj::DivisibleBy(comparedValue!, message$))
+  methodend
+  rem  * Add `DivisibleBy` validator with the default error message
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  */
+  method public ValidationBuilder divisibleBy(BBjNumber comparedValue!)
+    methodret #add(new ::BBjControlValidation/Validators/DivisibleBy.bbj::DivisibleBy(comparedValue!))
+  methodend
+  rem  * Add `Date` validator with a custom error message
+  rem  *
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder date(BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/Date.bbj::Date(message$))
+  methodend
+  rem  * Add `Date` validator with the default error message
+  rem  */
+  method public ValidationBuilder date()
+    methodret #add(new ::BBjControlValidation/Validators/Date.bbj::Date())
+  methodend
+  rem  * Add `Time` validator with a custom error message
+  rem  *
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder time(BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/Time.bbj::Time(message$))
+  methodend
+  rem  * Add `Time` validator with the default error message
+  rem  */
+  method public ValidationBuilder time()
+    methodret #add(new ::BBjControlValidation/Validators/Time.bbj::Time())
+  methodend
+  rem  * Add `DateTime` validator with a custom error message
+  rem  *
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder datetime(BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/DateTime.bbj::DateTime(message$))
+  methodend
+  rem  * Add `DateTime` validator with the default error message
+  rem  */
+  method public ValidationBuilder datetime()
+    methodret #add(new ::BBjControlValidation/Validators/DateTime.bbj::DateTime())
+  methodend
+  rem  * Add `Choice` validator with a custom error message
+  rem  *
+  rem  * @param choices! - A vector of valid choices
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder choice(BBjVector choices!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/Choice.bbj::Choice(choices!, message$))
+  methodend
+  rem  * Add `Choice` validator with the default error message
+  rem  *
+  rem  * @param choices! - A vector of valid choices
+  rem  */
+  method public ValidationBuilder choice(BBjVector choices!)
+    methodret #add(new ::BBjControlValidation/Validators/Choice.bbj::Choice(choices!))
+  methodend
+  rem  * Add `EqualTo` validator with a custom error message
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder equalTo(BBjString comparedValue!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/EqualTo.bbj::EqualTo(comparedValue!, message$))
+  methodend
+  rem  * Add `EqualTo` validator with the default error message
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  */
+  method public ValidationBuilder equalTo(BBjString comparedValue!)
+    methodret #add(new ::BBjControlValidation/Validators/EqualTo.bbj::EqualTo(comparedValue!))
+  methodend
+  rem  * Add `EqualTo` validator with a custom error message
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder equalTo(BBjNumber comparedValue!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/EqualTo.bbj::EqualTo(comparedValue!, message$))
+  methodend
+  rem  * Add `EqualTo` validator with the default error message
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  */
+  method public ValidationBuilder equalTo(BBjNumber comparedValue!)
+    methodret #add(new ::BBjControlValidation/Validators/EqualTo.bbj::EqualTo(comparedValue!))
+  methodend
+  rem  * Add `NotEqualTo` validator with a custom error message
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder noEqualTo(BBjString comparedValue!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/NotEqualTo.bbj::NotEqualTo(comparedValue!, message$))
+  methodend
+  rem  * Add `NotEqualTo` validator with the default error message
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  */
+  method public ValidationBuilder noEqualTo(BBjString comparedValue!)
+    methodret #add(new ::BBjControlValidation/Validators/NotEqualTo.bbj::NotEqualTo(comparedValue!))
+  methodend
+  rem  * Add `NotEqualTo` validator with a custom error message
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder noEqualTo(BBjNumber comparedValue!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/NotEqualTo.bbj::NotEqualTo(comparedValue!, message$))
+  methodend
+  rem  * Add `EqualTo` validator with the default error message
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  */
+  method public ValidationBuilder noEqualTo(BBjNumber comparedValue!)
+    methodret #add(new ::BBjControlValidation/Validators/NotEqualTo.bbj::NotEqualTo(comparedValue!))
+  methodend
+  rem  * Add `Match` validator with a custom error message
+  rem  *
+  rem  * @param selector$ - The query selector to use in order to find the control in the DOM
+  rem  * @param message$ - The invalid message
+  rem  */
+  method public ValidationBuilder match(BBjString selector$, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/Match.bbj::Match(selector$, message$))
+  methodend
+  rem  * Add `Match` validator with the default error message
+  rem  *
+  rem  * @param selector$ - The query selector to use in order to find the control in the DOM
+  rem  */
+  method public ValidationBuilder match(BBjString selector$)
+    methodret #add(new ::BBjControlValidation/Validators/Match.bbj::Match(selector$))
+  methodend
+  rem  * Add `IsTrue` validator with a custom error message
+  rem  *
+  rem  * @param message$ - The invalid message
+  rem  */
+  method public ValidationBuilder isTrue(BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/IsTrue.bbj::IsTrue(message$))
+  methodend
+  rem  * Add `IsTrue` validator with the default error message
+  rem  */
+  method public ValidationBuilder isTrue()
+    methodret #add(new ::BBjControlValidation/Validators/IsTrue.bbj::IsTrue())
+  methodend
+  rem  * Add `IsFalse` validator with a custom error message
+  rem  *
+  rem  * @param message$ - The invalid message
+  rem  */
+  method public ValidationBuilder isFalse(BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/IsFalse.bbj::IsFalse(message$))
+  methodend
+  rem  * Add `IsFalse` validator with the default error message
+  rem  */
+  method public ValidationBuilder isFalse()
+    methodret #add(new ::BBjControlValidation/Validators/IsFalse.bbj::IsFalse())
+  methodend
+  rem /**
+  rem  * Get the code of the javascript validators
+  rem  *
+  rem  * @return the code of the javascript validators
+  rem  */
+  method public String toString()
+    validator$ = "" +
+:    "const violations = [];" +
+:    "const accumulate = !!" + str(#getAccumulate()) + ";" +
+:    "let valid = true;" +
+:    "const buildViolation = (message, data) => message.replace(/{{(.*?)}}/g, (match) => {return data[match.split(/{{|}}/).filter(Boolean)[0].trim()]});" +
+:    "const addViolation = (message, data) => {valid = valid && false; violations.push(buildViolation(message, Object.assign(data || {}, {x,value,text})))};" +
+:    "const toOL = arr => arr.length === 1 ? arr[0] : '<ol>' + arr.reduce((html, item) =>  html + '<li>' + item + '</li>', '') + '</ol>';"
+    for i=0 to #getValidators().size()-1
+      validator$ = validator$ +
+:      "(() => {" + str(#getValidators().get(i)) + ";})();" +
+:      "if(!valid && !accumulate){" +
+:      "  control.invalidMessage = toOL(violations);" +
+:      "  return false;" +
+:      "}"
+    next i
+
+    methodret validator$ +
+:    "if(!valid) control.invalidMessage = toOL(violations);" +
+:    "return valid;"
+  methodend
+
+classend

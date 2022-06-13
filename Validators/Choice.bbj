@@ -1,0 +1,32 @@
+use ::BBjControlValidation/Validator.bbj::Validator
+rem /**
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public Choice extends Validator
+  rem /**
+  rem  * Validates that that the value is one of a given set of valid choices
+  rem  *
+  rem  * @param choices! - A vector of valid choices
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public Choice(BBjVector choices!, BBjString message$)
+    #super!(message$, "")
+    #Validator$ = "const choices = ["
+    for i=0 to choices!.size()-1
+      #Validator$ = #Validator$ + "'" + str(choices!.getItem(i)) + "',"        
+    next i
+    #Validator$ = #Validator$ + "];" +
+:    "if (![].concat(x).some(x => choices.includes(x))) {" +
+:    "  addViolation('" + message$ + "');" +
+:    "}"
+  methodend
+  rem /**
+  rem  * Validates that that the value is one of a given set of valid choices
+  rem  *
+  rem  * @param choices! - A vector of valid choices
+  rem  */
+  method public Choice(BBjVector choices!)
+    #this!(choices!, "The selected value is not a valid choice.")
+  methodend
+
+classend

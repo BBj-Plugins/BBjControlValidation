@@ -1,0 +1,25 @@
+use ::BBjControlValidation/Validator.bbj::Validator
+rem /**
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public NotBlank extends Validator
+  rem /**
+  rem  * Validates that a value is not blank - meaning not equal to a blank string, false or null
+  rem  *
+  rem  * @param message$ - The invalid message
+  rem  */
+  method public NotBlank(BBjString message$)
+    #super!(message$, "")
+    #Validator$ = "" +
+:    "if (!x || String(x).trim().length === 0) {" +
+:    "  addViolation('" + message$ + "');" +
+:    "}"
+  methodend
+  rem /**
+  rem  * Validates that a value is not blank - meaning not equal to a blank string, false or null
+  rem  */
+  method public NotBlank()
+    #this!("The value should not be blank.")
+  methodend
+
+classend

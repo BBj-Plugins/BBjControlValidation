@@ -1,0 +1,29 @@
+use ::BBjControlValidation/Validator.bbj::Validator
+rem /**
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public MaxLength extends Validator
+  rem /**
+  rem  * Validates that a given string length is less than or equal to a given length.
+  rem  *
+  rem  * @param max! - the maximum length of the string
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public MaxLength(BBjNumber max!, BBjString message$)
+    #super!(message$, "")
+    #Validator$ = "" +
+:    "if (String(x).length >= " + str(max!) + ") {" +
+:    "  const max = " + str(max!) + ";" +
+:    "  addViolation('" + message$ + "', {max});" +
+:    "}"
+  methodend
+  rem /**
+  rem  * Validates that a given string length is less than or equal to a given length.
+  rem  *
+  rem  * @param max! - the maximum length of the string
+  rem  */
+  method public MaxLength(BBjNumber max!)
+    #this!(max!, "The value is too long. It should have {{max}} characters or less.")
+  methodend
+
+classend

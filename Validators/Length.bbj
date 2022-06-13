@@ -1,0 +1,29 @@
+use ::BBjControlValidation/Validator.bbj::Validator
+rem /**
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public Length extends Validator
+  rem /**
+  rem  * Validates that a given string length equal to a given length.
+  rem  *
+  rem  * @param length! - the length of the string
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public Length(BBjNumber length!, BBjString message$)
+    #super!(message$, "")
+    #Validator$ = "" +
+:    "if (String(x).length !== " + str(length!) + ") {" +
+:    "  const length = " + str(length!) + ";" +
+:    "  addViolation('" + message$ + "', {length});" +
+:    "}"
+  methodend
+  rem /**
+  rem  * Validates that a given string length equal to a given length.
+  rem  *
+  rem  * @param length! - the length of the string
+  rem  */
+  method public Length(BBjNumber length!)
+    #this!(length!, "The value should be {{length}} characters long.")
+  methodend
+
+classend

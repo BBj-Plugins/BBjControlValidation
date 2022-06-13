@@ -1,0 +1,40 @@
+use ::BBjControlValidation/Validator.bbj::Validator
+rem /**
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public Regex extends Validator
+  rem /**
+  rem  * Validates that the control's value matches a regular expression.
+  rem  *
+  rem  * @param regex$ - The text of the regular expression.
+  rem  * @param flags$ - If regular expression flags.
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public Regex(BBjString regex$, BBjString flags$, BBjString message$)
+    #super!(message$, "")
+    #Validator$ = "" +
+:    "const regex = '" + regex$ + "';" +
+:    "const flags = '" + flags$ + "';" +
+:    "if (!(new RegExp(regex,flags)).test(x)) {" +
+:    "  addViolation('" + message$ + "', Object.assign(typeof data === 'undefined' ? {} : data , {regex,flags}));" +
+:    "}"
+  methodend
+  rem /**
+  rem  * Validates that a value matches a regular expression.
+  rem  *
+  rem  * @param regex$ - The text of the regular expression.
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public Regex(BBjString regex$, BBjString message$)
+    #this!(regex$, "", message$)
+  methodend
+  rem /**
+  rem  * Validates that a value matches a regular expression.
+  rem  *
+  rem  * @param regex$ - The text of the regular expression.
+  rem  */
+  method public Regex(BBjString regex$)
+    #this!(regex$, "", "This value is not valid.")
+  methodend
+
+classend

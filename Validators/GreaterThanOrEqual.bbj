@@ -1,0 +1,29 @@
+use ::BBjControlValidation/Validator.bbj::Validator
+rem /**
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public GreaterThanOrEqual extends Validator
+  rem /**
+  rem  * Validates that the value is greater than the specified value
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public GreaterThanOrEqual(BBjNumber comparedValue!, BBjString message$)
+    #super!(message$, "")
+    #Validator$ = "" +
+:    "if (false === Number(x) >= " + str(comparedValue!) + ") {" +
+:    "  const comparedValue = " + str(comparedValue!) + ";" +
+:    "  addViolation('" + message$ + "', {comparedValue});" +
+:    "}"
+  methodend
+  rem /**
+  rem  * Validates that the value is greater than the specified value
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  */
+  method public GreaterThanOrEqual(BBjNumber comparedValue!)
+    #this!(comparedValue!, "The value should be greater than or equals ""{{comparedValue}}"".")
+  methodend
+
+classend
