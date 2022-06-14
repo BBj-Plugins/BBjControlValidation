@@ -1,7 +1,7 @@
 # BBjControlValidation Plugin
 
 <p>
-  <a href="http://www.basis.com/downloads">
+  <a href="http://www.basis.cloud/downloads">
     <img src="https://img.shields.io/badge/BBj-v22.10-blue" alt="BBj v22.10" />
   </a>
   <a href="https://github.com/BBj-Plugins/BBjControlValidation/blob/master/README.md">
