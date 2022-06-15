@@ -1,27 +1,23 @@
 use ::BBjControlValidation/Validator.bbj::Validator
 rem /**
+rem  * Validates that the control's value is true. 
+rem  *  
 rem  * @author Hyyan Abo Fakher
 rem  */
 class public IsTrue extends Validator
+
+  method public IsTrue()
+    #this!("The value should be true.")
+  methodend
   rem /**
-  rem  * Validates that the value is true
-  rem  *
   rem  * @param message$ - The invalid message
   rem  */
   method public IsTrue(BBjString message$)
     #super!(message$, "")
-    #Validator$ = "" +
+    #Validator$ = "" +   
 :    "if (x !== true) {" +
 :    "  addViolation('" + message$ + "');" +
 :    "}"
-  methodend
-  rem /**
-  rem  * Validates that the value is true
-  rem  *
-  rem  * @param selector$ - The query selector to use in order to find the control in the DOM
-  rem  */
-  method public IsTrue()
-    #this!("The field should be checked.")
   methodend
 
 classend

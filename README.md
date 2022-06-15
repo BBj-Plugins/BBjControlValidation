@@ -4,6 +4,10 @@
   <a href="http://www.basis.cloud/downloads">
     <img src="https://img.shields.io/badge/BBj-v22.10-blue" alt="BBj v22.10" />
   </a>
+  </a>
+  <a href="http://www.basis.cloud/downloads">
+    <img src="https://img.shields.io/badge/Client-DWC-blue" alt="Client DWC" />
+  </a>    
   <a href="https://github.com/BBj-Plugins/BBjControlValidation/blob/master/README.md">
     <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="BBjControlValidation is released under the MIT license." />
   </a>
@@ -12,7 +16,14 @@
   </a>
 </p>
 
-BBjControlValidation provides a set of validation expressions for use in BBjControls.
+BBjControlValidation provides a set of Javascript validation expressions for use with BBjControls.
+
+## Features
+
+* Easy to set up
+* Easy to customize
+* Supports wide range of validators
+* Ability to extend and add new validator types
 
 ## Installation
 

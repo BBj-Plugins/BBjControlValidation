@@ -1,0 +1,27 @@
+use ::BBjControlValidation/Validator.bbj::Validator
+rem /**
+rem  * Validates that the control's value element count is at least the specified minimum.
+rem  *
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public MaxCount extends Validator
+  rem /**
+  rem  * @param max! - the maximum length to compare the control's value element count to 
+  rem  */
+  method public MaxCount(BBjNumber max!)
+    #this!(max!, "The list should contain {{ max }} item or less.")
+  methodend
+  rem /**
+  rem  * @param max! - the maximum length to compare the control's value element count to 
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public MaxCount(BBjNumber max!, BBjString message$)
+    #super!(message$, "")
+    #Validator$ = "" +
+:    "const max = " + str(max!) + ";" +
+:    "if (!(Array.isArray(x) && x.length <= max)) {" +
+:    "  addViolation('" + message$ + "', {max});" +
+:    "}"
+  methodend
+
+classend

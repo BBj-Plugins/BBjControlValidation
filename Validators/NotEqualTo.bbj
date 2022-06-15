@@ -1,21 +1,29 @@
 use ::BBjControlValidation/Validator.bbj::Validator
 rem /**
+rem  * Validates that the control's value is not equal to the given value
+rem  *
 rem  * @author Hyyan Abo Fakher
 rem  */
 class public NotEqualTo extends Validator
   rem /**
-  rem  * Validates that the value is not equal to the given value
-  rem  *
   rem  * @param comparedValue! - The value to compare with
   rem  * @param message$ - the error message to display
   rem  */
   method public NotEqualTo(BBjString comparedValue!, BBjString message$)
     #super!(message$, "")
     #Validator$ = "" +
-:    "if (x == '" + str(comparedValue!) + "') {" +
-:    "  const comparedValue = '" + str(comparedValue!) + "';" +
+:    "const comparedValue = '" + str(comparedValue!) + "';" +
+:    "if (String(x).trim().length && x == comparedValue) {" +
 :    "  addViolation('" + message$ + "', {comparedValue});" +
 :    "}"
+  methodend
+  rem /**
+  rem  * Validates that the value is not equal to the given value
+  rem  *
+  rem  * @param comparedValue! - The value to compare with
+  rem  */
+  method public NotEqualTo(BBjString comparedValue!)
+    #this!(comparedValue!, "This value should not be equal to ""{{comparedValue}}"".")
   methodend
   rem /**
   rem  * Validates that the value is not equal to the given value
@@ -25,14 +33,6 @@ class public NotEqualTo extends Validator
   rem  */
   method public NotEqualTo(BBjNumber comparedValue!, BBjString message$)
     #this!(str(comparedValue!), message$)
-  methodend
-  rem /**
-  rem  * Validates that the value is not equal to the given value
-  rem  *
-  rem  * @param comparedValue! - The value to compare with
-  rem  */
-  method public NotEqualTo(BBjString comparedValue!)
-    #this!(comparedValue!, "This value should not be equal to ""{{comparedValue}}"".")
   methodend
   rem /**
   rem  * Validates that the value is not equal to the given value

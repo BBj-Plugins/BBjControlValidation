@@ -1,21 +1,19 @@
 use ::BBjControlValidation/Validators/Regex.bbj::Regex
 rem /**
+rem  * Validates that a value is a valid datetime, meaning a string that follows a valid input type="datetime" format. (i.e. 1996-12-19T16:39:57-08:00)
+rem  *
 rem  * @author Hyyan Abo Fakher
 rem  */
 class public DateTime extends Regex
+
+  method public DateTime()
+    #this!("This value is not a valid datetime.")
+  methodend
   rem /**
-  rem  * Validates that a value is a valid datetime, meaning a string that follows a valid input type="datetime" format.
-  rem  *
   rem  * @param message$ - the error message to display
   rem  */
   method public DateTime(BBjString message$)
     #super!("([0-2][0-9]{3})\\-([0-1][0-9])\\-([0-3][0-9])T([0-5][0-9])\\:([0-5][0-9])\\:([0-5][0-9])(Z|([\\-\\+]([0-1][0-9])\\:00))", "", message$)
-  methodend
-  rem /**
-  rem  * Validates that a value is a valid date, meaning a string that follows a valid YYYY-MM-DD format.
-  rem  */
-  method public DateTime()
-    #this!("This value is not a valid datetime.")
   methodend
 
 classend

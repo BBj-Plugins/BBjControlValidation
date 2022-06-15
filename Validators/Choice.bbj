@@ -1,11 +1,18 @@
 use ::BBjControlValidation/Validator.bbj::Validator
+use java.util.Arrays
 rem /**
+rem  * Validates that that the control's value is one of a given set of valid choices
+rem  *
 rem  * @author Hyyan Abo Fakher
 rem  */
 class public Choice extends Validator
   rem /**
-  rem  * Validates that that the value is one of a given set of valid choices
-  rem  *
+  rem  * @param choices! - A vector of valid choices
+  rem  */
+  method public Choice(BBjVector choices!)
+    #this!(choices!, "The selected value is not a valid choice.")
+  methodend
+  rem /**
   rem  * @param choices! - A vector of valid choices
   rem  * @param message$ - the error message to display
   rem  */
@@ -13,20 +20,30 @@ class public Choice extends Validator
     #super!(message$, "")
     #Validator$ = "const choices = ["
     for i=0 to choices!.size()-1
-      #Validator$ = #Validator$ + "'" + str(choices!.getItem(i)) + "',"        
+      #Validator$ = #Validator$ + "'" + str(choices!.getItem(i)) + "'.trim(),"
     next i
+
     #Validator$ = #Validator$ + "];" +
-:    "if (![].concat(x).some(x => choices.includes(x))) {" +
-:    "  addViolation('" + message$ + "');" +
+:    "const _x = [].concat(x);" +
+:    "if (_x.length) {" +
+:    "  const invalid = _x.filter(i => !choices.includes(i));console.log({_x,invalid, choices});" +
+:    "  if (invalid.length) {" +
+:    "     addViolation('" + message$ + "');" +
+:    "  }" +
 :    "}"
   methodend
   rem /**
-  rem  * Validates that that the value is one of a given set of valid choices
-  rem  *
   rem  * @param choices! - A vector of valid choices
   rem  */
-  method public Choice(BBjVector choices!)
+  method public Choice(BBjString choices!)
     #this!(choices!, "The selected value is not a valid choice.")
+  methodend
+  rem /**
+  rem  * @param choices! - A vector of valid choices
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public Choice(BBjString choices!, BBjString message$)
+    #this!(new BBjVector(Arrays.asList(choices!.split(","))))
   methodend
 
 classend

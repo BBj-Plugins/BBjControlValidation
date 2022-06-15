@@ -1,29 +1,27 @@
 use ::BBjControlValidation/Validator.bbj::Validator
 rem /**
+rem  * Validates that the control value's length is at least `x` characters long
+rem  *
 rem  * @author Hyyan Abo Fakher
 rem  */
 class public MinLength extends Validator
   rem /**
-  rem  * Validates that a given string length is at least x characters
-  rem  *
-  rem  * @param min! - the minimum length of the string
+  rem  * @param min! - the minimum length
+  rem  */
+  method public MinLength(BBjNumber min!)
+    #this!(min!, "The value is too short. It should have {{min}} characters or more.")
+  methodend
+  rem /**
+  rem  * @param min! - the minimum length
   rem  * @param message$ - the error message to display
   rem  */
   method public MinLength(BBjNumber min!, BBjString message$)
     #super!(message$, "")
     #Validator$ = "" +
-:    "if (String(x).length <= " + str(min!) + ") {" +
-:    "  const min = " + str(min!) + ";" +
+:    "const min = " + str(min!) + ";" +
+:    "if (!(String(x).length >= min)) {" +
 :    "  addViolation('" + message$ + "', {min});" +
 :    "}"
-  methodend
-  rem /**
-  rem  * Validates that a given string length is at least x characters
-  rem  *
-  rem  * @param min! - the minimum length of the string
-  rem  */
-  method public MinLength(BBjNumber min!)
-    #this!(min!, "The value is too short. It should have {{min}} characters or more.")
   methodend
 
 classend

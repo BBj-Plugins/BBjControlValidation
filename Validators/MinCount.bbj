@@ -1,0 +1,27 @@
+use ::BBjControlValidation/Validator.bbj::Validator
+rem /**
+rem  * Validates that the control's value element count is at least the specified minimum.
+rem  *
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public MinCount extends Validator
+  rem /**
+  rem  * @param min! - the minimum length to compare the control's value element count to 
+  rem  */
+  method public MinCount(BBjNumber min!)
+    #this!(min!, "The list should contain {{ min }} item or more.")
+  methodend
+  rem /**
+  rem  * @param min! - the minimum length to compare the control's value element count to 
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public MinCount(BBjNumber min!, BBjString message$)
+    #super!(message$, "")
+    #Validator$ = "" +
+:    "const min = " + str(min!) + ";" +
+:    "if (!(Array.isArray(x) && x.length >= min)) {" +
+:    "  addViolation('" + message$ + "', {min});" +
+:    "}"
+  methodend
+
+classend

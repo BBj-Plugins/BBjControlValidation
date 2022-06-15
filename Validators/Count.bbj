@@ -1,0 +1,27 @@
+use ::BBjControlValidation/Validator.bbj::Validator
+rem /**
+rem  * Validates that the control's value element count is equal to the specified length.
+rem  *
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public Count extends Validator
+  rem /**
+  rem  * @param count! - the length to compare the control's value element count to 
+  rem  */
+  method public Count(BBjNumber count!)
+    #this!(count!, "This list should have exactly {{ count }} items.")
+  methodend
+  rem /**
+  rem  * @param count! - the length to compare the control's value element count to 
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public Count(BBjNumber count!, BBjString message$)
+    #super!(message$, "")
+    #Validator$ = "" +
+:    "const count = " + str(count!) + ";" +
+:    "if (!(Array.isArray(x) && x.length === count)) {" +
+:    "  addViolation('" + message$ + "', {count});" +
+:    "}"
+  methodend
+
+classend
