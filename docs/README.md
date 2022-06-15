@@ -704,3 +704,22 @@ control!.setClientValidationFunction(str(choiceValidator!))
 |  **Name**     |    **Description**   |
 |  ---  |  ---  |
 |   `x`, `value`, `text`     |    The control's value   |
+
+## Json
+
+Validates that the control's value is a valid json string
+
+### Usage
+
+```BBj
+use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
+
+validation! = (new ValidationBuilder()).json()
+control!.setClientValidationFunction(validation!.build())
+```
+
+### Message Parameters
+
+|  **Name**     |    **Description**   |
+|  ---  |  ---  |
+|   `x`, `value`, `text`     |    The control's value   |
