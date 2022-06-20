@@ -795,7 +795,7 @@ class public ValidationBuilder
   rem  */
   method public ValidationBuilder ipv4()
     methodret #add(new ::BBjControlValidation/Validators/IPv4.bbj::IPv4())
-  methodend   
+  methodend
   rem /**
   rem  * Add `IPv6` validator with a custom error message
   rem  *
@@ -831,7 +831,109 @@ class public ValidationBuilder
   rem  */
   method public ValidationBuilder alphaNumeric()
     methodret #add(new ::BBjControlValidation/Validators/AlphaNumeric.bbj::AlphaNumeric())
-  methodend              
+  methodend
+  rem /**
+  rem  * Add `URL` validator with a custom error message
+  rem  *
+  rem  * Validates that the control's value is valid URL
+  rem  *
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder url(BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/URL.bbj::URL(message$))
+  methodend
+  rem /**
+  rem  * Add `URL` validator with the default error message
+  rem  *
+  rem  * Validates that the control's value is valid URL
+  rem  */
+  method public ValidationBuilder url()
+    methodret #add(new ::BBjControlValidation/Validators/URL.bbj::URL())
+  methodend
+  rem /**
+  rem  * Add `Host` validator with a custom error message
+  rem  *
+  rem  * Validates that the control's value is valid URL containing the domain name.
+  rem  *
+  rem  * @param hosts! - A vector of valid hosts
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder host(BBjVector hosts!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/Host.bbj::Host(hosts!, message$))
+  methodend
+  rem /**
+  rem  * Add `Host` validator with the default error message
+  rem  *
+  rem  * Validates that the control's value is valid URL containing the domain name.
+  rem  *
+  rem  * @param hosts! - A vector of valid hosts
+  rem  */
+  method public ValidationBuilder host(BBjVector hosts!)
+    methodret #add(new ::BBjControlValidation/Validators/Host.bbj::Host(hosts!))
+  methodend
+  rem /**
+  rem  * Add `Host` validator with a custom error message
+  rem  *
+  rem  * Validates that the control's value is valid URL containing the domain name.
+  rem  *
+  rem  * @param hosts! - A comma separated list of valid hosts
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder host(BBjString hosts!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/Host.bbj::Host(hosts!, message$))
+  methodend
+  rem /**
+  rem  * Add `Host` validator with the default error message
+  rem  *
+  rem  * Validates that the control's value is valid URL containing the domain name.
+  rem  *
+  rem  * @param hosts! - A comma separated list of valid hosts
+  rem  */
+  method public ValidationBuilder host(BBjString hosts!)
+    methodret #add(new ::BBjControlValidation/Validators/Host.bbj::Host(hosts!))
+  methodend
+  rem /**
+  rem  * Add `Protocol` validator with a custom error message
+  rem  *
+  rem  * Validates that the control's value is valid URL with the given protocol.
+  rem  *
+  rem  * @param protocols! - A vector of valid protocols
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder protocol(BBjVector protocols!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/Protocol.bbj::Protocol(protocols!, message$))
+  methodend
+  rem /**
+  rem  * Add `Protocol` validator with the default error message
+  rem  *
+  rem  * Validates that the control's value is valid URL with the given protocol.
+  rem  *
+  rem  * @param protocols! - A vector of valid protocols
+  rem  */
+  method public ValidationBuilder protocol(BBjVector protocols!)
+    methodret #add(new ::BBjControlValidation/Validators/Protocol.bbj::Protocol(protocols!))
+  methodend
+  rem /**
+  rem  * Add `Protocol` validator with a custom error message
+  rem  *
+  rem  * Validates that the control's value is valid URL with the given protocol.
+  rem  *
+  rem  * @param protocols! - A comma separated list of valid protocols
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder protocol(BBjString protocols!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/Protocol.bbj::Protocol(protocols!, message$))
+  methodend
+  rem /**
+  rem  * Add `Protocol` validator with the default error message
+  rem  *
+  rem  * Validates that the control's value is valid URL with the given protocol.
+  rem  *
+  rem  * @param protocols! - A comma separated list of valid protocols
+  rem  */
+  method public ValidationBuilder protocol(BBjString protocols!)
+    methodret #add(new ::BBjControlValidation/Validators/Protocol.bbj::Protocol(protocols!))
+  methodend
   rem /**
   rem  * Build the required javascript code to initialize the validation
   rem  *

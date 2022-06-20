@@ -1,0 +1,48 @@
+use ::BBjControlValidation/Validator.bbj::Validator
+use java.util.Arrays
+rem /**
+rem  * Validates that the control's value is valid URL containing the domain name.
+rem  *
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public Host extends Validator
+  rem /**
+  rem  * @param domains! - A vector of domain names to validate.
+  rem  */
+  method public Host(BBjVector domains!)
+    #this!(domains!, "The value should be a valid url with a valid domain name.")
+  methodend
+  rem /**
+  rem  * @param domains! - A vector of domain names to validate.
+  rem  * @param message$ - The invalid message
+  rem  */
+  method public Host(BBjVector domains!, BBjString message$)
+    #super!(message$, "")
+    #Validator$ = "const domains = ["
+    for i=0 to domains!.size()-1
+      #Validator$ = #Validator$ + "'" + str(domains!.getItem(i)) + "'.trim(),"
+    next i
+
+    #Validator$ = #Validator$ + "].map(x => x.toLowerCase());" +
+:    "if (text.trim().length !== 0) {" +
+:    " const raise = () => addViolation('" + message$ + "');" +
+:    " try { " +
+:    "  let url = new URL(text);" +
+:    "  if (!domains.some(x => (new RegExp(x,'igm')).test(url.host))) raise();" +
+:    " } catch(e) { raise(); }" +
+:    "}"
+  methodend
+  rem /**
+  rem  * @param domains! - A comma separated list of domain names to validate.
+  rem  */
+  method public Host(BBjString domains!)
+    #this!(domains!, "The value should be a valid url with a valid domain name.")
+  methodend
+  rem /**
+  rem  * @param domains! - A comma separated list of domain names to validate.
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public Host(BBjString domains!, BBjString message$)
+    #this!(new BBjVector(Arrays.asList(domains!.split(","))))
+  methodend
+classend

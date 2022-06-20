@@ -1,0 +1,25 @@
+use ::BBjControlValidation/Validator.bbj::Validator
+rem /**
+rem  * Validates that the control's value is valid URL
+rem  *  
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public URL extends Validator
+
+  method public URL()
+    #this!("The value should be a valid URL.")
+  methodend
+  rem /**
+  rem  * @param message$ - The invalid message
+  rem  */
+  method public URL(BBjString message$)
+    #super!(message$, "")
+    #Validator$ = "" +
+:    "if (text.trim().length !== 0) {" +
+:    " try { new URL(text) } catch(e) {" +
+:    "  addViolation('" + message$ + "');" +
+:    " }" +
+:    "}"
+  methodend
+
+classend

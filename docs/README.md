@@ -825,3 +825,41 @@ control!.setClientValidationFunction(validation!.build())
 |   `x`, `value`, `text`     |    The control's value   |
 |   `regex`     |    The regular expression    |
 |   `flag`     |    The regular expression flags    |
+
+## Host
+
+Validates that the control's value is valid URL containing the domain name.
+
+### Usage
+
+```BBj
+use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
+
+validation! = (new ValidationBuilder()).host("example.com, foo.bar")
+control!.setClientValidationFunction(validation!.build())
+```
+
+### Message Parameters
+
+|  **Name**     |    **Description**   |
+|  ---  |  ---  |
+|   `x`, `value`, `text`     |    The control's value   |
+
+## Protocol
+
+Validates that the control's value is valid URL with the given protocol.
+
+### Usage
+
+```BBj
+use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
+
+validation! = (new ValidationBuilder()).protocol("sftp: , ssh:")
+control!.setClientValidationFunction(validation!.build())
+```
+
+### Message Parameters
+
+|  **Name**     |    **Description**   |
+|  ---  |  ---  |
+|   `x`, `value`, `text`     |    The control's value   |

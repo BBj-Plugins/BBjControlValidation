@@ -1,0 +1,48 @@
+use ::BBjControlValidation/Validator.bbj::Validator
+use java.util.Arrays
+rem /**
+rem  * Validates that the control's value is valid URL with the given protocol.
+rem  *
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public Protocol extends Validator
+  rem /**
+  rem  * @param protocols - A vector of protocol names to validate.
+  rem  */
+  method public Protocol(BBjVector protocols!)
+    #this!(protocols!, "The value should be a valid url with a valid protocol.")
+  methodend
+  rem /**
+  rem  * @param protocols - A vector of protocol names to validate.
+  rem  * @param message$ - The invalid message
+  rem  */
+  method public Protocol(BBjVector protocols!, BBjString message$)
+    #super!(message$, "")
+    #Validator$ = "const protocols = ["
+    for i=0 to protocols!.size()-1
+      #Validator$ = #Validator$ + "'" + str(protocols!.getItem(i)) + "'.trim(),"
+    next i
+
+    #Validator$ = #Validator$ + "].map(x => x.toLowerCase());" +
+:    "if (text.trim().length !== 0) {" +
+:    " const raise = () => addViolation('" + message$ + "');" +
+:    " try { " +
+:    "  let url = new URL(text);" +
+:    "  if (!protocols.some(x => (new RegExp(x,'igm')).test(url.protocol))) raise();" +
+:    " } catch(e) { raise(); }" +
+:    "}"
+  methodend
+  rem /**
+  rem  * @param protocols - A comma separated list of protocol names to validate.
+  rem  */
+  method public Protocol(BBjString protocols!)
+    #this!(protocols!, "The value should be a valid url with a valid protocol.")
+  methodend
+  rem /**
+  rem  * @param protocols - A comma separated list of protocol names to validate.
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public Protocol(BBjString protocols!, BBjString message$)
+    #this!(new BBjVector(Arrays.asList(protocols!.split(","))))
+  methodend
+classend
