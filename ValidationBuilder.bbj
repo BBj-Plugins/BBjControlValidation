@@ -795,7 +795,25 @@ class public ValidationBuilder
   rem  */
   method public ValidationBuilder ipv4()
     methodret #add(new ::BBjControlValidation/Validators/IPv4.bbj::IPv4())
-  methodend    
+  methodend   
+  rem /**
+  rem  * Add `IPv6` validator with a custom error message
+  rem  *
+  rem  * Validates that a value is a valid IPv6 address
+  rem  *
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder ipv6(BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/IPv6.bbj::IPv6(message$))
+  methodend
+  rem /**
+  rem  * Add `IPv6` validator with the default error message
+  rem  *
+  rem  * Validates that a value is a valid IPv6 address
+  rem  */
+  method public ValidationBuilder ipv6()
+    methodret #add(new ::BBjControlValidation/Validators/IPv6.bbj::IPv6())
+  methodend         
   rem /**
   rem  * Build the required javascript code to initialize the validation
   rem  *

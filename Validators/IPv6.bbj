@@ -1,0 +1,19 @@
+use ::BBjControlValidation/Validators/Regex.bbj::Regex
+rem /**
+rem  * Validates that a value is a valid IPv6 address
+rem  *
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public IPv6 extends Regex
+
+  method public IPv6()
+    #this!("The value is not a valid IPv6 address.")
+  methodend
+  rem /**
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public IPv6(BBjString message$)
+    #super!("((^|:)([0-9a-fA-F]{0,4})){1,8}$", "gm", message$)
+  methodend
+
+classend

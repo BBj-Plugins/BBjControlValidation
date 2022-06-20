@@ -783,3 +783,24 @@ control!.setClientValidationFunction(validation!.build())
 |   `x`, `value`, `text`     |    The control's value   |
 |   `regex`     |    The regular expression    |
 |   `flag`     |    The regular expression flags    |
+
+## IPv6
+
+Validates that a value is a valid IPv6 address
+
+### Usage
+
+```BBj
+use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
+
+validation! = (new ValidationBuilder()).ipv6()
+control!.setClientValidationFunction(validation!.build())
+```
+
+### Message Parameters
+
+|  **Name**     |    **Description**   |
+|  ---  |  ---  |
+|   `x`, `value`, `text`     |    The control's value   |
+|   `regex`     |    The regular expression    |
+|   `flag`     |    The regular expression flags    |
