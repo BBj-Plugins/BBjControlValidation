@@ -1,0 +1,19 @@
+use ::BBjControlValidation/Validators/Regex.bbj::Regex
+rem /**
+rem  * Validates that the control's value contains only alphabetical and numerical characters.
+rem  *
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public AlphaNumeric extends Regex
+
+  method public AlphaNumeric()
+    #this!("The value should contain only alphabetical and numerical characters.")
+  methodend
+  rem /**
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public AlphaNumeric(BBjString message$)
+    #super!("^[a-zA-Z0-9_]+$", "gm", message$)
+  methodend
+
+classend

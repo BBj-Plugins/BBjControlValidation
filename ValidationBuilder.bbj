@@ -813,7 +813,25 @@ class public ValidationBuilder
   rem  */
   method public ValidationBuilder ipv6()
     methodret #add(new ::BBjControlValidation/Validators/IPv6.bbj::IPv6())
-  methodend         
+  methodend
+  rem /**
+  rem  * Add `AlphaNumeric` validator with a custom error message
+  rem  *
+  rem  * Validates that the control's value contains only alphabetical and numerical characters.
+  rem  *
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder alphaNumeric(BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/AlphaNumeric.bbj::AlphaNumeric(message$))
+  methodend
+  rem /**
+  rem  * Add `AlphaNumeric` validator with the default error message
+  rem  *
+  rem  * Validates that the control's value contains only alphabetical and numerical characters.
+  rem  */
+  method public ValidationBuilder alphaNumeric()
+    methodret #add(new ::BBjControlValidation/Validators/AlphaNumeric.bbj::AlphaNumeric())
+  methodend              
   rem /**
   rem  * Build the required javascript code to initialize the validation
   rem  *

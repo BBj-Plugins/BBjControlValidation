@@ -804,3 +804,24 @@ control!.setClientValidationFunction(validation!.build())
 |   `x`, `value`, `text`     |    The control's value   |
 |   `regex`     |    The regular expression    |
 |   `flag`     |    The regular expression flags    |
+
+## AlphaNumeric
+
+Validates that the control's value contains only alphabetical and numerical characters.
+
+### Usage
+
+```BBj
+use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
+
+validation! = (new ValidationBuilder()).alphaNumeric()
+control!.setClientValidationFunction(validation!.build())
+```
+
+### Message Parameters
+
+|  **Name**     |    **Description**   |
+|  ---  |  ---  |
+|   `x`, `value`, `text`     |    The control's value   |
+|   `regex`     |    The regular expression    |
+|   `flag`     |    The regular expression flags    |
