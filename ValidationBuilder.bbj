@@ -663,7 +663,7 @@ class public ValidationBuilder
   methodend
   rem /**
   rem  * Add `Match` validator with a custom error message
-  rem  *  
+  rem  *
   rem  * Validates that a control's value matches the value of a second control which can be found with the given selector
   rem  *
   rem  * @param selector$ - The query selector to use in order to find the control in the DOM
@@ -674,9 +674,9 @@ class public ValidationBuilder
   methodend
   rem /**
   rem  * Add `Match` validator with the default error message
-  rem  * 
+  rem  *
   rem  * Validates that a control's value matches the value of a second control which can be found with the given selector
-  rem  *  
+  rem  *
   rem  * @param selector$ - The query selector to use in order to find the control in the DOM
   rem  */
   method public ValidationBuilder match(BBjString selector$)
@@ -684,9 +684,9 @@ class public ValidationBuilder
   methodend
   rem /**
   rem  * Add `Json` validator with a custom error message
-  rem  * 
+  rem  *
   rem  * Validates that the control's value is a valid json string
-  rem  *  
+  rem  *
   rem  * @param message$ - @param message$ - the error message to display
   rem  */
   method public ValidationBuilder json(BBjString message$)
@@ -694,51 +694,90 @@ class public ValidationBuilder
   methodend
   rem /**
   rem  * Add `Json` validator with the default error message
-  rem  * 
+  rem  *
   rem  * Validates that the control's value is a valid json string
   rem  */
   method public ValidationBuilder json()
     methodret #add(new ::BBjControlValidation/Validators/Json.bbj::Json())
-  methodend  
+  methodend
   rem /**
   rem  * Add `PastDate` validator with a custom error message
-  rem  * 
+  rem  *
   rem  * Validates that the controls's value is a date in the past. The time portion of the date will be ignored.
-  rem  *  
-  rem  * @param inclusive! - When true , the current date will be included. 
+  rem  *
+  rem  * @param inclusive! - When true , the current date will be included.
   rem  * @param message$ - @param message$ - the error message to display
   rem  */
-  method public ValidationBuilder pastDate(Boolean inclusive!, BBjString message$)
+  method public ValidationBuilder pastDate(BBjNumber inclusive!, BBjString message$)
     methodret #add(new ::BBjControlValidation/Validators/PastDate.bbj::PastDate(inclusive!, message$))
   methodend
   rem /**
   rem  * Add `PastDate` validator with a custom error message
-  rem  * 
+  rem  *
   rem  * Validates that the controls's value is a date in the past. The time portion of the date will be ignored.
-  rem  *  
+  rem  *
   rem  * @param message$ - @param message$ - the error message to display
   rem  */
   method public ValidationBuilder pastDate(BBjString message$)
     methodret #add(new ::BBjControlValidation/Validators/PastDate.bbj::PastDate(message$))
-  methodend   
+  methodend
   rem /**
   rem  * Add `PastDate` validator with a custom error message
-  rem  * 
+  rem  *
   rem  * Validates that the controls's value is a date in the past. The time portion of the date will be ignored.
-  rem  *  
-  rem  * @param inclusive! - When true , the current date will be included. 
+  rem  *
+  rem  * @param inclusive! - When true , the current date will be included.
   rem  */
-  method public ValidationBuilder pastDate(Boolean inclusive!)
+  method public ValidationBuilder pastDate(BBjNumber inclusive!)
     methodret #add(new ::BBjControlValidation/Validators/PastDate.bbj::PastDate(inclusive!))
-  methodend         
+  methodend
   rem /**
   rem  * Add `PastDate` validator with the default error message
-  rem  * 
+  rem  *
   rem  * Validates that the controls's value is a date in the past. The time portion of the date will be ignored.
   rem  */
   method public ValidationBuilder pastDate()
     methodret #add(new ::BBjControlValidation/Validators/PastDate.bbj::PastDate())
-  methodend             
+  methodend
+  rem /**
+  rem  * Add `FutureDate` validator with a custom error message
+  rem  *
+  rem  * Validates that the controls's value is a date in the future. The time portion of the date will be ignored.
+  rem  *
+  rem  * @param inclusive! - When true , the current date will be included.
+  rem  * @param message$ - @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder futureDate(BBjNumber inclusive!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/FutureDate.bbj::FutureDate(inclusive!, message$))
+  methodend
+  rem /**
+  rem  * Add `FutureDate` validator with a custom error message
+  rem  *
+  rem  * Validates that the controls's value is a date in the future. The time portion of the date will be ignored.
+  rem  *
+  rem  * @param message$ - @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder futureDate(BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/FutureDate.bbj::FutureDate(message$))
+  methodend
+  rem /**
+  rem  * Add `FutureDate` validator with a custom error message
+  rem  *
+  rem  * Validates that the controls's value is a date in the future. The time portion of the date will be ignored.
+  rem  *
+  rem  * @param inclusive! - When true , the current date will be included.
+  rem  */
+  method public ValidationBuilder futureDate(BBjNumber inclusive!)
+    methodret #add(new ::BBjControlValidation/Validators/FutureDate.bbj::FutureDate(inclusive!))
+  methodend
+  rem /**
+  rem  * Add `FutureDate` validator with the default error message
+  rem  *
+  rem  * Validates that the controls's value is a date in the future. The time portion of the date will be ignored.
+  rem  */
+  method public ValidationBuilder futureDate()
+    methodret #add(new ::BBjControlValidation/Validators/FutureDate.bbj::FutureDate())
+  methodend
   rem /**
   rem  * Build the required javascript code to initialize the validation
   rem  *

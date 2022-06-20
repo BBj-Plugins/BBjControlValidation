@@ -1,42 +1,42 @@
 use ::BBjControlValidation/Validator.bbj::Validator
 rem /**
-rem  * Validates that the controls's value is a date in the past. The time portion of the date will be ignored.
+rem  * Validates that the controls's value is a date in the future. The time portion of the date will be ignored.
 rem  *
 rem  * @author Hyyan Abo Fakher
 rem  */
-class public PastDate extends Validator
+class public FutureDate extends Validator
 
-  method public PastDate()
+  method public FutureDate()
     #this!(0)
   methodend
   rem /**
   rem  * @param inclusive! - When true , the current date will be included.
   rem  */
-  method public PastDate(BBjNumber inclusive!)
-    #this!(inclusive!, "The value should be a date in the past.")
+  method public FutureDate(BBjNumber inclusive!)
+    #this!(inclusive!, "The value should be a date in the future.")
   methodend
   rem /**
   rem  * @param message$ - The invalid message
   rem  */
-  method public PastDate(BBjString message$)
+  method public FutureDate(BBjString message$)
     #this!(0, message$)
   methodend
   rem /**
   rem  * @param inclusive! - When true , the current date will be included.
   rem  * @param message$ - The invalid message
   rem  */
-  method public PastDate(BBjNumber inclusive!, BBjString message$)
+  method public FutureDate(BBjNumber inclusive!, BBjString message$)
     #super!(message$, "")
     #Validator$ = "" +
 :    "const inclusive = " + str(inclusive!) + ";" +
-:    "const isPast = (f,s) => {" +
+:    "const isFuture = (f,s) => {" +
 :    " if (isNaN(f)) return false;" +
 :    " f.setHours(0, 0, 0, 0);" +
 :    " s.setHours(0, 0, 0, 0);" +
-:    " return inclusive ? (f <= s) : (f < s);" +
+:    " return inclusive ? (f >= s) : (f > s);" +
 :    "};" +
 :    "if (text.trim().length) {" +
-:    " if(!isPast(new Date(text), new Date())) addViolation('" + message$ + "');" +
+:    " if(!isFuture(new Date(text), new Date())) addViolation('" + message$ + "');" +
 :    "}"
   methodend
 

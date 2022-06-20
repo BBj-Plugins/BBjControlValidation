@@ -642,6 +642,45 @@ control!.setClientValidationFunction(str(dateValidator!))
 |   `regex`     |    The regular expression    |
 |   `flag`     |    The regular expression flags    |
 
+## PastDate
+
+Validates that the controls's value is a date in the past. The time portion of the date will be ignored.
+
+### Usage
+
+```BBj
+use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
+
+validator! = (new ValidationBuilder()).pastDate()
+control!.setClientValidationFunction(str(validator!))
+```
+
+### Message Parameters
+
+|  **Name**     |    **Description**   |
+|  ---  |  ---  |
+|   `x`, `value`, `text`     |    The control's value   |
+
+## FutureDate
+
+Validates that the controls's value is a date in the future. The time portion of the date will be ignored.
+
+### Usage
+
+```BBj
+use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
+
+validator! = (new ValidationBuilder()).futureDate()
+control!.setClientValidationFunction(str(validator!))
+```
+
+### Message Parameters
+
+|  **Name**     |    **Description**   |
+|  ---  |  ---  |
+|   `x`, `value`, `text`     |    The control's value   |
+
+
 ## Time
 
 Validates that the control's value is a valid time, meaning a string that follows a valid HH:MM:SS format.
@@ -662,25 +701,6 @@ control!.setClientValidationFunction(str(timeValidator!))
 |   `x`, `value`, `text`     |    The control's value   |
 |   `regex`     |    The regular expression    |
 |   `flag`     |    The regular expression flags    |
-
-## PastDate
-
-Validates that the controls's value is a date in the past. The time portion of the date will be ignored.
-
-### Usage
-
-```BBj
-use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
-
-validator! = (new ValidationBuilder()).pastDate()
-control!.setClientValidationFunction(str(validator!))
-```
-
-### Message Parameters
-
-|  **Name**     |    **Description**   |
-|  ---  |  ---  |
-|   `x`, `value`, `text`     |    The control's value   |
 
 ## Match 
 
