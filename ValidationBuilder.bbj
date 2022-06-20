@@ -969,7 +969,25 @@ class public ValidationBuilder
   rem  */
   method public ValidationBuilder md5()
     methodret #add(new ::BBjControlValidation/Validators/Md5.bbj::Md5())
-  methodend          
+  methodend   
+  rem /**
+  rem  * Add `Base64` validator with a custom error message
+  rem  *
+  rem  * Validates that the control's value is valid Base64 string
+  rem  *
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder base64(BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/Base64.bbj::Base64(message$))
+  methodend
+  rem /**
+  rem  * Add `Base64` validator with the default error message
+  rem  *
+  rem  * Validates that the control's value is valid Base64 string
+  rem  */
+  method public ValidationBuilder base64()
+    methodret #add(new ::BBjControlValidation/Validators/Base64.bbj::Base64())
+  methodend                
   rem /**
   rem  * Build the required javascript code to initialize the validation
   rem  *
