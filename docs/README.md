@@ -762,3 +762,24 @@ control!.setClientValidationFunction(validation!.build())
 |  **Name**     |    **Description**   |
 |  ---  |  ---  |
 |   `x`, `value`, `text`     |    The control's value   |
+
+## IPv4
+
+Validates that a value is a valid IPv4 address
+
+### Usage
+
+```BBj
+use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
+
+validation! = (new ValidationBuilder()).ipv4()
+control!.setClientValidationFunction(validation!.build())
+```
+
+### Message Parameters
+
+|  **Name**     |    **Description**   |
+|  ---  |  ---  |
+|   `x`, `value`, `text`     |    The control's value   |
+|   `regex`     |    The regular expression    |
+|   `flag`     |    The regular expression flags    |
