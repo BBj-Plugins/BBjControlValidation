@@ -951,7 +951,25 @@ class public ValidationBuilder
   rem  */
   method public ValidationBuilder uuid()
     methodret #add(new ::BBjControlValidation/Validators/UUID.bbj::UUID())
-  methodend    
+  methodend
+  rem /**
+  rem  * Add `Md5` validator with a custom error message
+  rem  *
+  rem  * Validates that the control's value is a valid Md5 hash
+  rem  *
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder md5(BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/Md5.bbj::Md5(message$))
+  methodend
+  rem /**
+  rem  * Add `Md5` validator with the default error message
+  rem  *
+  rem  * Validates that the control's value is a valid Md5 hash
+  rem  */
+  method public ValidationBuilder md5()
+    methodret #add(new ::BBjControlValidation/Validators/Md5.bbj::Md5())
+  methodend          
   rem /**
   rem  * Build the required javascript code to initialize the validation
   rem  *

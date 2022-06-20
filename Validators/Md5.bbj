@@ -1,0 +1,19 @@
+use ::BBjControlValidation/Validators/Regex.bbj::Regex
+rem /**
+rem  * Validates that the control's value is a valid Md5 hash
+rem  *
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public Md5 extends Regex
+
+  method public Md5()
+    #this!("The value is not a valid Md5 hash.")
+  methodend
+  rem /**
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public Md5(BBjString message$)
+    #super!("[0-9a-fA-F]{32}", "ig", message$)
+  methodend
+
+classend
