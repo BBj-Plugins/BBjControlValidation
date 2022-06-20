@@ -863,3 +863,25 @@ control!.setClientValidationFunction(validation!.build())
 |  **Name**     |    **Description**   |
 |  ---  |  ---  |
 |   `x`, `value`, `text`     |    The control's value   |
+
+
+## UUID
+
+Validates that the control's value is a valid UUID
+
+### Usage
+
+```BBj
+use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
+
+validation! = (new ValidationBuilder()).uuid()
+control!.setClientValidationFunction(validation!.build())
+```
+
+### Message Parameters
+
+|  **Name**     |    **Description**   |
+|  ---  |  ---  |
+|   `x`, `value`, `text`     |    The control's value   |
+|   `regex`     |    The regular expression    |
+|   `flag`     |    The regular expression flags    |

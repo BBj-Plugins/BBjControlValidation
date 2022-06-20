@@ -1,0 +1,19 @@
+use ::BBjControlValidation/Validators/Regex.bbj::Regex
+rem /**
+rem  * Validates that the control's value is a valid UUID
+rem  *
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public UUID extends Regex
+
+  method public UUID()
+    #this!("The value is not a valid UUID address.")
+  methodend
+  rem /**
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public UUID(BBjString message$)
+    #super!("^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$", "i", message$)
+  methodend
+
+classend
