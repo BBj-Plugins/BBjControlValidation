@@ -1,0 +1,19 @@
+use ::BBjControlValidation/Validators/Regex.bbj::Regex
+rem /**
+rem  * Validates that a value is a valid IPv4 address
+rem  *
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public IPv4 extends Regex
+
+  method public IPv4()
+    #this!("The value is not a valid IPv4 address.")
+  methodend
+  rem /**
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public IPv4(BBjString message$)
+    #super!("((^|\\.)((25[0-5])|(2[0-4]\\d)|(1\\d\\d)|([1-9]?\\d))){4}$", "i", message$)
+  methodend
+
+classend

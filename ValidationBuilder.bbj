@@ -779,6 +779,24 @@ class public ValidationBuilder
     methodret #add(new ::BBjControlValidation/Validators/FutureDate.bbj::FutureDate())
   methodend
   rem /**
+  rem  * Add `IPv4` validator with a custom error message
+  rem  *
+  rem  * Validates that a value is a valid IPv4 address
+  rem  *
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder ipv4(BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/IPv4.bbj::IPv4(message$))
+  methodend
+  rem /**
+  rem  * Add `IPv4` validator with the default error message
+  rem  *
+  rem  * Validates that a value is a valid IPv4 address
+  rem  */
+  method public ValidationBuilder ipv4()
+    methodret #add(new ::BBjControlValidation/Validators/IPv4.bbj::IPv4())
+  methodend    
+  rem /**
   rem  * Build the required javascript code to initialize the validation
   rem  *
   rem  * @return the code of the javascript validators
