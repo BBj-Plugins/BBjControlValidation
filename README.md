@@ -22,7 +22,7 @@ BBjControlValidation provides a set of Javascript validation expressions for use
 
 * Easy to set up
 * Easy to customize
-* Supports wide range of validators
+* 30+ of common validators
 * Ability to extend and add new validator types
 
 ## Installation
