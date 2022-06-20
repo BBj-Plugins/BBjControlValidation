@@ -28,7 +28,7 @@ class public Regex extends Validator
     #Validator$ = "" +
 :    "const regex = '" + regex$ + "';" +
 :    "const flags = '" + flags$ + "';" +
-:    "if ((typeof x === 'string' && x.trim().length) && !(new RegExp(regex,flags)).test(x)) {" +
+:    "if ((text.trim().length) && !(new RegExp(regex,flags)).test(text)) {" +
 :    "  addViolation('" + message$ + "', Object.assign(typeof data === 'undefined' ? {} : data , {regex,flags}));" +
 :    "}"
   methodend
