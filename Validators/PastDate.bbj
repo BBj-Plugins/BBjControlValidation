@@ -1,0 +1,43 @@
+use ::BBjControlValidation/Validator.bbj::Validator
+rem /**
+rem  * Validates that the controls's value is a date in the past. The time portion of the date will be ignored.
+rem  *
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public PastDate extends Validator
+
+  method public PastDate()
+    #this!(BBjAPI.FALSE)
+  methodend
+  rem /**
+  rem  * @param inclusive! - When true , the current date will be included.
+  rem  */
+  method public PastDate(Boolean inclusive!)
+    #this!(inclusive!, "The value should be a date in the past.")
+  methodend
+  rem /**
+  rem  * @param message$ - The invalid message
+  rem  */
+  method public PastDate(BBjString message$)
+    #this!(BBjAPI.FALSE, message$)
+  methodend
+  rem /**
+  rem  * @param inclusive! - When true , the current date will be included.
+  rem  * @param message$ - The invalid message
+  rem  */
+  method public PastDate(Boolean inclusive!, BBjString message$)
+    #super!(message$, "")
+    #Validator$ = "" +
+:    "const inclusive = " + str(inclusive!) + ";" +
+:    "const isPast = (f,s) => {" +
+:    " if (isNaN(f)) return false;" +
+:    " f.setHours(0, 0, 0, 0);" +
+:    " s.setHours(0, 0, 0, 0);" +
+:    " return inclusive ? (f <= s) : (f < s);" +
+:    "};" +
+:    "if (text.trim().length) {" +
+:    " if(!isPast(new Date(text), new Date())) addViolation('" + message$ + "');" +
+:    "}"
+  methodend
+
+classend

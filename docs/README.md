@@ -663,6 +663,25 @@ control!.setClientValidationFunction(str(timeValidator!))
 |   `regex`     |    The regular expression    |
 |   `flag`     |    The regular expression flags    |
 
+## PastDate
+
+Validates that the controls's value is a date in the past. The time portion of the date will be ignored.
+
+### Usage
+
+```BBj
+use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
+
+validator! = (new ValidationBuilder()).pastDate()
+control!.setClientValidationFunction(str(validator!))
+```
+
+### Message Parameters
+
+|  **Name**     |    **Description**   |
+|  ---  |  ---  |
+|   `x`, `value`, `text`     |    The control's value   |
+
 ## Match 
 
 Validates that a control's value matches the value of a second control which can be found with the given selector

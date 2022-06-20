@@ -699,7 +699,46 @@ class public ValidationBuilder
   rem  */
   method public ValidationBuilder json()
     methodret #add(new ::BBjControlValidation/Validators/Json.bbj::Json())
-  methodend          
+  methodend  
+  rem /**
+  rem  * Add `PastDate` validator with a custom error message
+  rem  * 
+  rem  * Validates that the controls's value is a date in the past. The time portion of the date will be ignored.
+  rem  *  
+  rem  * @param inclusive! - When true , the current date will be included. 
+  rem  * @param message$ - @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder pastDate(Boolean inclusive!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/PastDate.bbj::PastDate(inclusive!, message$))
+  methodend
+  rem /**
+  rem  * Add `PastDate` validator with a custom error message
+  rem  * 
+  rem  * Validates that the controls's value is a date in the past. The time portion of the date will be ignored.
+  rem  *  
+  rem  * @param message$ - @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder pastDate(BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/PastDate.bbj::PastDate(message$))
+  methodend   
+  rem /**
+  rem  * Add `PastDate` validator with a custom error message
+  rem  * 
+  rem  * Validates that the controls's value is a date in the past. The time portion of the date will be ignored.
+  rem  *  
+  rem  * @param inclusive! - When true , the current date will be included. 
+  rem  */
+  method public ValidationBuilder pastDate(Boolean inclusive!)
+    methodret #add(new ::BBjControlValidation/Validators/PastDate.bbj::PastDate(inclusive!))
+  methodend         
+  rem /**
+  rem  * Add `PastDate` validator with the default error message
+  rem  * 
+  rem  * Validates that the controls's value is a date in the past. The time portion of the date will be ignored.
+  rem  */
+  method public ValidationBuilder pastDate()
+    methodret #add(new ::BBjControlValidation/Validators/PastDate.bbj::PastDate())
+  methodend             
   rem /**
   rem  * Build the required javascript code to initialize the validation
   rem  *
