@@ -1027,7 +1027,7 @@ class public ValidationBuilder
     methodret #add(new ::BBjControlValidation/Validators/Luhn.bbj::Luhn())
   methodend
   rem /**
-  rem  * Add `CreditCardType` validator with a custom error message
+  rem  * Add `CardScheme` validator with a custom error message
   rem  *
   rem  * Validates that the control's value is a valid card type.
   rem  *  
@@ -1037,11 +1037,11 @@ class public ValidationBuilder
   rem  * @param types! - A vector of valid hosts
   rem  * @param message$ - the error message to display
   rem  */
-  method public ValidationBuilder creditCardType(BBjVector types!, BBjString message$)
-    methodret #add(new ::BBjControlValidation/Validators/CreditCardType.bbj::CreditCardType(types!, message$))
+  method public ValidationBuilder cardScheme(BBjVector types!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/CardScheme.bbj::CardScheme(types!, message$))
   methodend
   rem /**
-  rem  * Add `CreditCardType` validator with the default error message
+  rem  * Add `CardScheme` validator with the default error message
   rem  *
   rem  * Validates that the control's value is a valid card type.
   rem  *  
@@ -1050,11 +1050,11 @@ class public ValidationBuilder
   rem  *
   rem  * @param types! - A vector of valid hosts
   rem  */
-  method public ValidationBuilder creditCardType(BBjVector types!)
-    methodret #add(new ::BBjControlValidation/Validators/CreditCardType.bbj::CreditCardType(types!))
+  method public ValidationBuilder cardScheme(BBjVector types!)
+    methodret #add(new ::BBjControlValidation/Validators/CardScheme.bbj::CardScheme(types!))
   methodend
   rem /**
-  rem  * Add `CreditCardType` validator with a custom error message
+  rem  * Add `CardScheme` validator with a custom error message
   rem  *
   rem  * The following is the list of supported types: 
   rem  * `Amex`, `Dankort`, `Diners`, `Discover`, `JCB`, `MasterCard`, `VisaElectron`, `Visa`.
@@ -1062,19 +1062,19 @@ class public ValidationBuilder
   rem  * @param types! - A comma separated list of valid hosts
   rem  * @param message$ - the error message to display
   rem  */
-  method public ValidationBuilder creditCardType(BBjString types!, BBjString message$)
-    methodret #add(new ::BBjControlValidation/Validators/CreditCardType.bbj::CreditCardType(types!, message$))
+  method public ValidationBuilder cardScheme(BBjString types!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/CardScheme.bbj::CardScheme(types!, message$))
   methodend
   rem /**
-  rem  * Add `CreditCardType` validator with the default error message
+  rem  * Add `CardScheme` validator with the default error message
   rem  *
   rem  * The following is the list of supported types: 
   rem  * `Amex`, `Dankort`, `Diners`, `Discover`, `JCB`, `MasterCard`, `VisaElectron`, `Visa`.
   rem  *
   rem  * @param types! - A comma separated list of valid hosts
   rem  */
-  method public ValidationBuilder creditCardType(BBjString types!)
-    methodret #add(new ::BBjControlValidation/Validators/CreditCardType.bbj::CreditCardType(types!))
+  method public ValidationBuilder cardScheme(BBjString types!)
+    methodret #add(new ::BBjControlValidation/Validators/CardScheme.bbj::CardScheme(types!))
   methodend
   rem /**
   rem  * Add `VAT` validator with a custom error message

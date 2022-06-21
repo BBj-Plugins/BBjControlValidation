@@ -986,7 +986,7 @@ control!.setClientValidationFunction(validation!.build())
 |  ---  |  ---  |
 |   `x`, `value`, `text`     |    The control's value   |
 
-## CreditCardType
+## CardScheme
 
 Validates that the control's value is a valid card type
 The following is the list of supported types: 
@@ -1005,7 +1005,7 @@ The following is the list of supported types:
 ```BBj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
-validation! = (new ValidationBuilder()).creditCardType("Amex", "Visa", "MasterCard")
+validation! = (new ValidationBuilder()).cardScheme("Visa, MasterCard")
 control!.setClientValidationFunction(validation!.build())
 ```
 

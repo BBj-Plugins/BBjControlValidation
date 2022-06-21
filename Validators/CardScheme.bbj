@@ -6,20 +6,20 @@ rem  * The following is the list of supported types: `Amex`, `Dankort`, `Diners`
 rem  *
 rem  * @author Hyyan Abo Fakher
 rem  */
-class public CreditCardType extends Validator
+class public CardScheme extends Validator
 
   field public static BBjString DefaultMessage$ = "Invalid card type."
   rem /**
   rem  * @param types! - A list of credit card types to validate.
   rem  */
-  method public CreditCardType(BBjVector types!)
-    #this!(types!, CreditCardType.getDefaultMessage())
+  method public CardScheme(BBjVector types!)
+    #this!(types!, CardScheme.getDefaultMessage())
   methodend
   rem /**
   rem  * @param types! - A list of credit card types to validate.
   rem  * @param message$ - The invalid message
   rem  */
-  method public CreditCardType(BBjVector types!, BBjString message$)
+  method public CardScheme(BBjVector types!, BBjString message$)
     #super!(message$, "")
     #Validator$ = "const selection = ["
     for i=0 to types!.size()-1
@@ -48,14 +48,14 @@ class public CreditCardType extends Validator
   rem /**
   rem  * @param types! - A comma separated list of credit card types to validate.
   rem  */
-  method public CreditCardType(BBjString types!)
-    #this!(types!, CreditCardType.getDefaultMessage())
+  method public CardScheme(BBjString types!)
+    #this!(types!, CardScheme.getDefaultMessage())
   methodend
   rem /**
   rem  * @param types! - A comma separated list of credit card types to validate.
   rem  * @param message$ - the error message to display
   rem  */
-  method public CreditCardType(BBjString types!, BBjString message$)
+  method public CardScheme(BBjString types!, BBjString message$)
     #this!(new BBjVector(Arrays.asList(types!.split(","))))
   methodend
 
