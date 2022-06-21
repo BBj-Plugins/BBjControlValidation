@@ -944,3 +944,24 @@ control!.setClientValidationFunction(validation!.build())
 |  **Name**     |    **Description**   |
 |  ---  |  ---  |
 |   `x`, `value`, `text`     |    The control's value   |
+
+## BIC
+
+Validates that the control's value is a valid BIC code.
+
+### Usage
+
+```BBj
+use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
+
+validation! = (new ValidationBuilder()).bic()
+control!.setClientValidationFunction(validation!.build())
+```
+
+### Message Parameters
+
+|  **Name**     |    **Description**   |
+|  ---  |  ---  |
+|   `x`, `value`, `text`     |    The control's value   |
+|   `regex`     |    The regular expression    |
+|   `flag`     |    The regular expression flags    |

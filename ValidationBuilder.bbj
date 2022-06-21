@@ -987,7 +987,25 @@ class public ValidationBuilder
   rem  */
   method public ValidationBuilder iban()
     methodret #add(new ::BBjControlValidation/Validators/IBAN.bbj::IBAN())
-  methodend                
+  methodend 
+  rem /**
+  rem  * Add `BIC` validator with a custom error message
+  rem  *
+  rem  * Validates that the control's value is a valid BIC code
+  rem  *
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder bic(BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/BIC.bbj::BIC(message$))
+  methodend
+  rem /**
+  rem  * Add `BIC` validator with the default error message
+  rem  *
+  rem  * Validates that the control's value is a valid BIC code
+  rem  */
+  method public ValidationBuilder bic()
+    methodret #add(new ::BBjControlValidation/Validators/BIC.bbj::BIC())
+  methodend                     
   rem /**
   rem  * Build the required javascript code to initialize the validation
   rem  *
