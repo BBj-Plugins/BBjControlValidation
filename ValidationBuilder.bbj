@@ -1111,7 +1111,25 @@ class public ValidationBuilder
   rem  */
   method public ValidationBuilder isbn()
     methodret #add(new ::BBjControlValidation/Validators/ISBN.bbj::ISBN())
-  methodend       
+  methodend 
+  rem /**
+  rem  * Add `SocialSecurityNumber` validator with a custom error message
+  rem  *
+  rem  * Validates that the control's value is a valid social security number
+  rem  *
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder socialSecurityNumber(BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/SocialSecurityNumber.bbj::SocialSecurityNumber(message$))
+  methodend
+  rem /**
+  rem  * Add `SocialSecurityNumber` validator with the default error message
+  rem  *
+  rem  * Validates that the control's value is a valid social security number
+  rem  */
+  method public ValidationBuilder socialSecurityNumber()
+    methodret #add(new ::BBjControlValidation/Validators/SocialSecurityNumber.bbj::SocialSecurityNumber())
+  methodend           
   rem /**
   rem  * Build the required javascript code to initialize the validation
   rem  *
