@@ -1035,3 +1035,24 @@ control!.setClientValidationFunction(validation!.build())
 |   `x`, `value`, `text`     |    The control's value   |
 |   `regex`     |    The regular expression    |
 |   `flag`     |    The regular expression flags    |
+
+## ISBN
+
+Validates that the control's value is a valid International Standard Book Number (ISBN).
+
+### Usage
+
+```BBj
+use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
+
+validation! = (new ValidationBuilder()).isbn()
+control!.setClientValidationFunction(validation!.build())
+```
+
+### Message Parameters
+
+|  **Name**     |    **Description**   |
+|  ---  |  ---  |
+|   `x`, `value`, `text`     |    The control's value   |
+|   `regex`     |    The regular expression    |
+|   `flag`     |    The regular expression flags    |

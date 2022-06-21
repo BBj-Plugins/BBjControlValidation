@@ -1093,7 +1093,25 @@ class public ValidationBuilder
   rem  */
   method public ValidationBuilder vat()
     methodret #add(new ::BBjControlValidation/Validators/VAT.bbj::VAT())
-  methodend    
+  methodend 
+  rem /**
+  rem  * Add `ISBN` validator with a custom error message
+  rem  *
+  rem  * Validates that the control's value is a valid International Standard Book Number (ISBN).
+  rem  *
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder isbn(BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/ISBN.bbj::ISBN(message$))
+  methodend
+  rem /**
+  rem  * Add `ISBN` validator with the default error message
+  rem  *
+  rem  * Validates that the control's value is a valid International Standard Book Number (ISBN).
+  rem  */
+  method public ValidationBuilder isbn()
+    methodret #add(new ::BBjControlValidation/Validators/ISBN.bbj::ISBN())
+  methodend       
   rem /**
   rem  * Build the required javascript code to initialize the validation
   rem  *
