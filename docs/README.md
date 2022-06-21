@@ -985,3 +985,32 @@ control!.setClientValidationFunction(validation!.build())
 |  **Name**     |    **Description**   |
 |  ---  |  ---  |
 |   `x`, `value`, `text`     |    The control's value   |
+
+## CreditCardType
+
+Validates that the control's value is a valid card type
+The following is the list of supported types: 
+
+  * Amex
+  * Dankort
+  * Diners
+  * Discover
+  * JCB
+  * MasterCard
+  * VisaElectron
+  * Visa
+
+### Usage
+
+```BBj
+use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
+
+validation! = (new ValidationBuilder()).creditCardType("Amex", "Visa", "MasterCard")
+control!.setClientValidationFunction(validation!.build())
+```
+
+### Message Parameters
+
+|  **Name**     |    **Description**   |
+|  ---  |  ---  |
+|   `x`, `value`, `text`     |    The control's value   |

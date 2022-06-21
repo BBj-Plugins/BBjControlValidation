@@ -969,7 +969,7 @@ class public ValidationBuilder
   rem  */
   method public ValidationBuilder md5()
     methodret #add(new ::BBjControlValidation/Validators/Md5.bbj::Md5())
-  methodend   
+  methodend
   rem /**
   rem  * Add `IBAN` validator with a custom error message
   rem  *
@@ -987,7 +987,7 @@ class public ValidationBuilder
   rem  */
   method public ValidationBuilder iban()
     methodret #add(new ::BBjControlValidation/Validators/IBAN.bbj::IBAN())
-  methodend 
+  methodend
   rem /**
   rem  * Add `BIC` validator with a custom error message
   rem  *
@@ -1005,11 +1005,11 @@ class public ValidationBuilder
   rem  */
   method public ValidationBuilder bic()
     methodret #add(new ::BBjControlValidation/Validators/BIC.bbj::BIC())
-  methodend  
+  methodend
   rem /**
   rem  * Add `Luhn` validator with a custom error message
   rem  *
-  rem  * Validates that the control's value with Luhn. 
+  rem  * Validates that the control's value with Luhn.
   rem  * It is useful as a first step to validating a credit card: before communicating with a payment gateway.
   rem  *
   rem  * @param message$ - the error message to display
@@ -1020,12 +1020,62 @@ class public ValidationBuilder
   rem /**
   rem  * Add `Luhn` validator with the default error message
   rem  *
-  rem  * Validates that the control's value with Luhn. 
+  rem  * Validates that the control's value with Luhn.
   rem  * It is useful as a first step to validating a credit card: before communicating with a payment gateway.
   rem  */
   method public ValidationBuilder luhn()
     methodret #add(new ::BBjControlValidation/Validators/Luhn.bbj::Luhn())
-  methodend                         
+  methodend
+  rem /**
+  rem  * Add `CreditCardType` validator with a custom error message
+  rem  *
+  rem  * Validates that the control's value is a valid card type.
+  rem  *  
+  rem  * The following is the list of supported types: 
+  rem  * `Amex`, `Dankort`, `Diners`, `Discover`, `JCB`, `MasterCard`, `VisaElectron`, `Visa`.
+  rem  *
+  rem  * @param types! - A vector of valid hosts
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder creditCardType(BBjVector types!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/CreditCardType.bbj::CreditCardType(types!, message$))
+  methodend
+  rem /**
+  rem  * Add `CreditCardType` validator with the default error message
+  rem  *
+  rem  * Validates that the control's value is a valid card type.
+  rem  *  
+  rem  * The following is the list of supported types: 
+  rem  * `Amex`, `Dankort`, `Diners`, `Discover`, `JCB`, `MasterCard`, `VisaElectron`, `Visa`.
+  rem  *
+  rem  * @param types! - A vector of valid hosts
+  rem  */
+  method public ValidationBuilder creditCardType(BBjVector types!)
+    methodret #add(new ::BBjControlValidation/Validators/CreditCardType.bbj::CreditCardType(types!))
+  methodend
+  rem /**
+  rem  * Add `CreditCardType` validator with a custom error message
+  rem  *
+  rem  * The following is the list of supported types: 
+  rem  * `Amex`, `Dankort`, `Diners`, `Discover`, `JCB`, `MasterCard`, `VisaElectron`, `Visa`.
+  rem  *
+  rem  * @param types! - A comma separated list of valid hosts
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder creditCardType(BBjString types!, BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/CreditCardType.bbj::CreditCardType(types!, message$))
+  methodend
+  rem /**
+  rem  * Add `CreditCardType` validator with the default error message
+  rem  *
+  rem  * The following is the list of supported types: 
+  rem  * `Amex`, `Dankort`, `Diners`, `Discover`, `JCB`, `MasterCard`, `VisaElectron`, `Visa`.
+  rem  *
+  rem  * @param types! - A comma separated list of valid hosts
+  rem  */
+  method public ValidationBuilder creditCardType(BBjString types!)
+    methodret #add(new ::BBjControlValidation/Validators/CreditCardType.bbj::CreditCardType(types!))
+  methodend
   rem /**
   rem  * Build the required javascript code to initialize the validation
   rem  *

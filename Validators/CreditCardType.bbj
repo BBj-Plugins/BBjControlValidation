@@ -1,0 +1,62 @@
+use ::BBjControlValidation/Validator.bbj::Validator
+use java.util.Arrays
+rem /**
+rem  * Validates that the control's value is a valid card type
+rem  * The following is the list of supported types: `Amex`, `Dankort`, `Diners`, `Discover`, `JCB`, `MasterCard`, `VisaElectron`, `Visa`.
+rem  *
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public CreditCardType extends Validator
+
+  field public static BBjString DefaultMessage$ = "Invalid card type."
+  rem /**
+  rem  * @param types! - A list of credit card types to validate.
+  rem  */
+  method public CreditCardType(BBjVector types!)
+    #this!(types!, CreditCardType.getDefaultMessage())
+  methodend
+  rem /**
+  rem  * @param types! - A list of credit card types to validate.
+  rem  * @param message$ - The invalid message
+  rem  */
+  method public CreditCardType(BBjVector types!, BBjString message$)
+    #super!(message$, "")
+    #Validator$ = "const selection = ["
+    for i=0 to types!.size()-1
+      #Validator$ = #Validator$ + "'" + str(types!.getItem(i)) + "',"
+    next i
+
+    #Validator$ = #Validator$ + "].map(x => x.trim().toLowerCase());" +
+:    "const patterns = {" +
+:    "  'amex': /^3[47]/," +
+:    "  'dankort': /^5019/," +
+:    "  'diners': /^(30[0-5]|36|38|39)/," +
+:    "  'discover': /^6(011(0[0-9]|[2-4]|74|7[7-9]|8[6-9]|9[0-9])|4[4-9]|5)/," +
+:    "  'jcb': /^(3[0-9]{15}|(2131|1800|35\d{3})\d{11})/," +
+:    "  'mastercard': /^(2[3-7]|22[2-9]|5[1-5])/," +
+:    "  'visa': /^4/," +
+:    "  'visaelectron': /^(4026|417500|4405|4508|4844|4913|4917)/," +
+:    "};" +
+:    "const _t = text.replace(/\D/g, '');" +
+:    "if (_t.trim().length) {" +
+:    "  const picked = selection.filter(k => k in patterns).reduce((o2, key) => (o2.push(patterns[key]), o2), []);" +
+:    "  if(!picked.some(x => x.test(text))) {" +
+:    "   addViolation('" + message$ + "');" +
+:    "  }" +
+:    "}"
+  methodend
+  rem /**
+  rem  * @param types! - A comma separated list of credit card types to validate.
+  rem  */
+  method public CreditCardType(BBjString types!)
+    #this!(types!, CreditCardType.getDefaultMessage())
+  methodend
+  rem /**
+  rem  * @param types! - A comma separated list of credit card types to validate.
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public CreditCardType(BBjString types!, BBjString message$)
+    #this!(new BBjVector(Arrays.asList(types!.split(","))))
+  methodend
+
+classend
