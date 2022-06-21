@@ -925,3 +925,22 @@ control!.setClientValidationFunction(validation!.build())
 |  **Name**     |    **Description**   |
 |  ---  |  ---  |
 |   `x`, `value`, `text`     |    The control's value   |
+
+## IBAN
+
+Validates that the control's value is valid IBAN number.
+
+### Usage
+
+```BBj
+use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
+
+validation! = (new ValidationBuilder()).iban()
+control!.setClientValidationFunction(validation!.build())
+```
+
+### Message Parameters
+
+|  **Name**     |    **Description**   |
+|  ---  |  ---  |
+|   `x`, `value`, `text`     |    The control's value   |

@@ -971,22 +971,22 @@ class public ValidationBuilder
     methodret #add(new ::BBjControlValidation/Validators/Md5.bbj::Md5())
   methodend   
   rem /**
-  rem  * Add `Base64` validator with a custom error message
+  rem  * Add `IBAN` validator with a custom error message
   rem  *
-  rem  * Validates that the control's value is valid Base64 string
+  rem  * Validates that the control's value is valid IBAN number.
   rem  *
   rem  * @param message$ - the error message to display
   rem  */
-  method public ValidationBuilder base64(BBjString message$)
-    methodret #add(new ::BBjControlValidation/Validators/Base64.bbj::Base64(message$))
+  method public ValidationBuilder iban(BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/IBAN.bbj::IBAN(message$))
   methodend
   rem /**
-  rem  * Add `Base64` validator with the default error message
+  rem  * Add `IBAN` validator with the default error message
   rem  *
-  rem  * Validates that the control's value is valid Base64 string
+  rem  * Validates that the control's value is valid IBAN number.
   rem  */
-  method public ValidationBuilder base64()
-    methodret #add(new ::BBjControlValidation/Validators/Base64.bbj::Base64())
+  method public ValidationBuilder iban()
+    methodret #add(new ::BBjControlValidation/Validators/IBAN.bbj::IBAN())
   methodend                
   rem /**
   rem  * Build the required javascript code to initialize the validation
