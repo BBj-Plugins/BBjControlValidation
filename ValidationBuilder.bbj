@@ -1005,7 +1005,27 @@ class public ValidationBuilder
   rem  */
   method public ValidationBuilder bic()
     methodret #add(new ::BBjControlValidation/Validators/BIC.bbj::BIC())
-  methodend                     
+  methodend  
+  rem /**
+  rem  * Add `Luhn` validator with a custom error message
+  rem  *
+  rem  * Validates that the control's value with Luhn. 
+  rem  * It is useful as a first step to validating a credit card: before communicating with a payment gateway.
+  rem  *
+  rem  * @param message$ - the error message to display
+  rem  */
+  method public ValidationBuilder luhn(BBjString message$)
+    methodret #add(new ::BBjControlValidation/Validators/Luhn.bbj::Luhn(message$))
+  methodend
+  rem /**
+  rem  * Add `Luhn` validator with the default error message
+  rem  *
+  rem  * Validates that the control's value with Luhn. 
+  rem  * It is useful as a first step to validating a credit card: before communicating with a payment gateway.
+  rem  */
+  method public ValidationBuilder luhn()
+    methodret #add(new ::BBjControlValidation/Validators/Luhn.bbj::Luhn())
+  methodend                         
   rem /**
   rem  * Build the required javascript code to initialize the validation
   rem  *

@@ -965,3 +965,23 @@ control!.setClientValidationFunction(validation!.build())
 |   `x`, `value`, `text`     |    The control's value   |
 |   `regex`     |    The regular expression    |
 |   `flag`     |    The regular expression flags    |
+
+## Luhn
+
+Validates that the control's value with Luhn. 
+It is useful as a first step to validating a credit card: before communicating with a payment gateway.
+
+### Usage
+
+```BBj
+use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
+
+validation! = (new ValidationBuilder()).luhn()
+control!.setClientValidationFunction(validation!.build())
+```
+
+### Message Parameters
+
+|  **Name**     |    **Description**   |
+|  ---  |  ---  |
+|   `x`, `value`, `text`     |    The control's value   |

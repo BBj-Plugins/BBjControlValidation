@@ -1,0 +1,41 @@
+use ::BBjControlValidation/Validator.bbj::Validator
+rem /**
+rem  * Validates that the control's value with Luhn. 
+rem  *  
+rem  * It is useful as a first step to validating a credit card: before communicating with a payment gateway.
+rem  *  
+rem  * @see https://en.wikipedia.org/wiki/Luhn_algorithm
+rem  * @author Hyyan Abo Fakher
+rem  */
+class public Luhn extends Validator
+
+  method public Luhn()
+    #this!("Invalid card number.")
+  methodend
+  rem /**
+  rem  * @see https://gist.github.com/DiegoSalazar/4075533
+  rem  * @param message$ - The invalid message
+  rem  */
+  method public Luhn(BBjString message$)
+    #super!(message$, "")
+    #Validator$ = "" +
+:    "const luhn = (value) => {" +
+:    "  let nCheck = 0;" +
+:    "  if (value && /[0-9-\s]+/.test(value)) {" +
+:    "    value = value.replace(/\D/g, '');" +
+:    "    value.split('').forEach((v, n) => {" +
+:    "      let nDigit = parseInt(v, 10);" +
+:    "      if (!((value.length + n) % 2) && (nDigit *= 2) > 9) {" +
+:    "        nDigit -= 9;" +
+:    "      }" +
+:    "      nCheck += nDigit;" +
+:    "    });" +
+:    "  }" +
+:    "  return (nCheck % 10) === 0;" +
+:    "};" +
+:    "if (text.trim().length === 0 || !luhn(text)) {" +
+:    " addViolation('" + message$ + "');" +
+:    "}"
+  methodend
+
+classend
