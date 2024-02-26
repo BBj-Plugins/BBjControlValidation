@@ -41,9 +41,34 @@ BBjControlValidation provides a set of Javascript validation expressions for use
 <br><br>
 
 
-```BBj
+```bbj
 use com.google.gson.JsonObject
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
+
+rem styles
+rem =======================
+style! = "
+: .outer {
+:  position: absolute;
+:  top: 50%;
+:  left: 50%;
+:  padding: var(--dwc-space-m);
+:  transform: translateX(-50%) translateY(-50%);
+: }
+: .panel {
+:  width: 350px;
+:  height: 100%;
+:  padding: var(--dwc-space);
+:  display: flex;
+:  flex-direction: column;
+:  gap: var(--dwc-space-m);
+:  justify-items: stretch;
+:  align-items: stretch;
+: }
+:"
+
+web! = BBjAPI().getWebManager()
+web!.injectStyle(style!, 0)
 
 rem Validation constraints
 rem =======================
@@ -52,25 +77,6 @@ passwordValidator! = (new ValidationBuilder()).notBlank().password().match(".con
 confirmValidator! = (new ValidationBuilder()).notBlank().match(".password-editbox", "The password does not match")
 checkedValidator! = (new ValidationBuilder()).isTrue("You must accept the terms and conditions")
 
-rem styles
-rem =======
-outerStyle! = new JsonObject()
-outerStyle!.addProperty("position", "absolute")
-outerStyle!.addProperty("top", "50%")
-outerStyle!.addProperty("left", "50%")
-outerStyle!.addProperty("padding", "var(--bbj-space-m)")
-outerStyle!.addProperty("transform", "translateX(-50%) translateY(-50%)")
-
-panelStyle! = new JsonObject()
-panelStyle!.addProperty("width", "300px")
-panelStyle!.addProperty("height", "100%")
-panelStyle!.addProperty("padding", "var(--bbj-space)")
-panelStyle!.addProperty("display", "grid")
-panelStyle!.addProperty("gap", "var(--bbj-space-m)")
-panelStyle!.addProperty("grid-template-columns", "auto")
-panelStyle!.addProperty("justify-items", "stretch")
-panelStyle!.addProperty("align-items", "stretch")
-
 rem UI elements
 rem ============
 sysgui = unt
@@ -78,8 +84,8 @@ open (sysgui)"X0"
 sysgui! = bbjapi().getSysGui()
 window! = sysgui!.addWindow(25,25,300,120,"Create New Account",$00190000$)
 window!.setTitleBarVisible(BBjAPI.FALSE)
-window!.setOuterStyle("@element", outerStyle!.toString())
-window!.setPanelStyle("@element", panelStyle!.toString())
+window!.addOuterStyle("outer")
+window!.addPanelStyle("panel")
 window!.setCallback(window!.ON_CLOSE, "handleClose")
 
 title! = window!.addStaticText("<html><h1 style='text-align:center'>Create New Account</h1></html>")
@@ -104,11 +110,11 @@ confirm!.setAttribute("placeholder", "Confirm password")
 confirm!.setClientValidationFunction(str(confirmValidator!))
 
 accept! = window!.addCheckBox("Agree to the terms and conditions as set out by the user agreement.")
-accept!.addStyle("bbj-whitespace-wrap")
+accept!.addClass("bbj-whitespace-wrap")
 accept!.setClientValidationFunction(str(checkedValidator!))
 
 submit! = window!.addButton("Submit")
-submit!.setStyle("margin-top", "var(--bbj-space-m)")
+submit!.setStyle("margin-top", "var(--dwc-space-m)")
 submit!.setAttribute("expanse", "m")
 submit!.setAttribute("theme", "primary")
 submit!.setCallback(submit!.ON_FORM_VALIDATION, "handleSubmit")
@@ -132,7 +138,7 @@ release
 By default the `ValidationBuilder` will accumulate all errors and display them at once. It is possible to disable this feature 
 by passing `false` to the constructor then only one violation message will be displayed at once. 
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = new ValidationBuilder(BBjAPI.FALSE)
@@ -145,7 +151,7 @@ The `ValidationBuilder` provide two methods to add/remove validators.
 1. `add(::BBjControlValidation/Validator.bbj::Validator validator!)`
 2. `remove(::BBjControlValidation/Validator.bbj::Validator validator!)`
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 use ::BBjControlValidation/Validators/NotBlank.bbj::NotBlank
 use ::BBjControlValidation/Validators/MinLength.bbj::MinLength
@@ -167,7 +173,7 @@ In order to add new validators , you need a class which extends the `::BBjContro
 
 For instance , here is a simple `Gmail` validator
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 use ::BBjControlValidation/Validator.bbj::Validator
 
@@ -199,7 +205,7 @@ Validates that the control's value is blank - meaning equals to a blank string o
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).blank("Optional Message")
@@ -219,7 +225,7 @@ Validates that the control's value is not blank - meaning not equals to a blank 
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).notBlank("Optional Message")
@@ -240,7 +246,7 @@ Validates that the control's value is true.
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).isTrue()
@@ -261,7 +267,7 @@ Validates that the control's value is false.
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).isFalse()
@@ -280,7 +286,7 @@ Validates that the control's value length equal to a given length.
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).length(10, "The value should be {{length}} characters long.")
@@ -300,7 +306,7 @@ Validates that the control value's length is at least `x` characters long
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).minLength(10)
@@ -320,7 +326,7 @@ Validates that the control value's length is equal or greater than the specified
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).maxLength(10)
@@ -340,7 +346,7 @@ Validates that the control's value element count is equal to the specified lengt
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).count(10)
@@ -360,7 +366,7 @@ Validates that the control's value element count is at least the specified minim
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).minCount(10)
@@ -380,7 +386,7 @@ Validates that the control's value element count is at least the specified minim
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).maxCount(10)
@@ -400,7 +406,7 @@ Validates that the control's value is equal to the given value
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).equalTo("Foobar")
@@ -420,7 +426,7 @@ Validates that the control's value is not equal to the given value
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).notEqualTo("Foobar")
@@ -440,7 +446,7 @@ Validates that the value is greater than the specified value
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).greaterThan(10)
@@ -460,7 +466,7 @@ Validates that the value is greater than or equals to the specified value
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).greaterThanOrEqual(10)
@@ -480,7 +486,7 @@ Validates that the value is less than the specified value
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).lessThan(10)
@@ -500,7 +506,7 @@ Validates that the value is less than or equals the specified value
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).lessThanOrEqual(10)
@@ -520,7 +526,7 @@ Validates that the value is divisible by the given number.
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).divisibleBy(5)
@@ -541,7 +547,7 @@ Validates that the control's value matches a regular expression.
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).regex("^\d+$", "ig", "The value does not match {{regex}}")
@@ -562,7 +568,7 @@ Validates that the control's value is a valid email address
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).email("Not valid email")
@@ -584,7 +590,7 @@ Validates that the control's value is a valid password (UpperCase, LowerCase, Nu
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).password(10)
@@ -606,7 +612,7 @@ Validates that the control's value is a valid datetime, meaning a string that fo
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 dateTimeValidator! = (new ValidationBuilder()).datetime()
@@ -627,7 +633,7 @@ Validates that the control's value is a valid date, meaning a string that follow
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 dateValidator! = (new ValidationBuilder()).date()
@@ -648,7 +654,7 @@ Validates that the controls's value is a date in the past. The time portion of t
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validator! = (new ValidationBuilder()).pastDate()
@@ -667,7 +673,7 @@ Validates that the controls's value is a date in the future. The time portion of
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validator! = (new ValidationBuilder()).futureDate()
@@ -687,7 +693,7 @@ Validates that the control's value is a valid time, meaning a string that follow
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 timeValidator! = (new ValidationBuilder()).time()
@@ -708,7 +714,7 @@ Validates that a control's value matches the value of a second control which can
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).match(".password-editbox", "The password does not match")
@@ -727,7 +733,7 @@ Validates that that the control's value is one of a given set of valid choices
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 choices! =  new BBjVector()
@@ -750,7 +756,7 @@ Validates that the control's value is a valid json string
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).json()
@@ -769,7 +775,7 @@ Validates that a value is a valid IPv4 address
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).ipv4()
@@ -790,7 +796,7 @@ Validates that a value is a valid IPv6 address
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).ipv6()
@@ -811,7 +817,7 @@ Validates that the control's value contains only alphabetical and numerical char
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).alphaNumeric()
@@ -832,7 +838,7 @@ Validates that the control's value is valid URL containing the domain name.
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).host("example.com, foo.bar")
@@ -851,7 +857,7 @@ Validates that the control's value is valid URL with the given protocol.
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).protocol("sftp: , ssh:")
@@ -871,7 +877,7 @@ Validates that the control's value is a valid UUID
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).uuid()
@@ -892,7 +898,7 @@ Validates that the control's value is a valid Md5 hash
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).md5()
@@ -913,7 +919,7 @@ Validates that the control's value is valid Base64 string
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).base64()
@@ -932,7 +938,7 @@ Validates that the control's value is valid IBAN number.
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).iban()
@@ -951,7 +957,7 @@ Validates that the control's value is a valid BIC code.
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).bic()
@@ -973,7 +979,7 @@ It is useful as a first step to validating a credit card: before communicating w
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).luhn()
@@ -1002,7 +1008,7 @@ The following is the list of supported types:
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).cardScheme("Visa, MasterCard")
@@ -1021,7 +1027,7 @@ Validates that the control's value is a valid VAT identification number.
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).vat()
@@ -1042,7 +1048,7 @@ Validates that the control's value is a valid International Standard Book Number
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).isbn()
@@ -1063,7 +1069,7 @@ Validates that the control's value is a valid social security number
 
 ### Usage
 
-```BBj
+```bbj
 use ::BBjControlValidation/ValidationBuilder.bbj::ValidationBuilder
 
 validation! = (new ValidationBuilder()).socialSecurityNumber()
